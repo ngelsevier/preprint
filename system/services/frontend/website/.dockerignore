@@ -1,0 +1,7 @@
+*
+!supervisord.conf
+!out/production/classes
+!out/production/external-runtime-libraries
+!out/production/internal-runtime-libraries
+!out/production/resources
+!filebeat

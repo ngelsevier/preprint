@@ -1,0 +1,9 @@
+---
+services:
+  - authors
+  - frontend
+  - search
+  - papers
+  - logging
+fake-services:
+  - '/test/support/fake-old-platform'

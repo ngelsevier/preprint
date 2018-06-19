@@ -1,0 +1,16 @@
+filebeat:
+  prospectors:
+    -
+      paths:
+        - /var/log/papers-consumer/papers-consumer.log
+      input_type: log
+      multiline:
+        pattern: '^(TRACE|DEBUG|INFO|WARN|ERROR)[[:space:]]+\['
+        negate: true
+        match: after
+      fields:
+        service: search-papers-consumer
+        version: ${VERSION}
+output:
+  logstash:
+    hosts: ["logstash.internal-service:80"]

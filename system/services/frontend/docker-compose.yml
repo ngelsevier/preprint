@@ -1,0 +1,34 @@
+version: '2.1'
+services:
+  fake-cdn:
+    extends:
+      file: ../../test/support/fake-cdn/docker-compose.yml
+      service: service
+    ports:
+      - "80:80"
+      - "81:81"
+  fake-load-balancer:
+    extends:
+      file: ../../test/support/fake-load-balancer/docker-compose.yml
+      service: service
+  website:
+    extends:
+      file: website/docker-compose-${FRONTEND_DOCKER_COMPOSE_SERVICE_MODE:-build}.yml
+      service: service
+    environment:
+      - SEARCH_SERVICE_BASE_URL=http://fake-search.internal-service
+      - SEARCH_RESULT_PAGE_SIZE=${SEARCH_RESULT_PAGE_SIZE:-2}
+      - OLD_PLATFORM_ARTICLE_PAGE_BASE_URL=${OLD_PLATFORM_ARTICLE_PAGE_BASE_URL:-http://localhq.ssrn.com}
+      - OLD_PLATFORM_AUTHOR_PROFILE_PAGE_BASE_URL=${OLD_PLATFORM_AUTHOR_PROFILE_PAGE_BASE_URL:-http://localhq.ssrn.com}
+      - OLD_PLATFORM_AUTHOR_IMAGE_BASE_URL=${OLD_PLATFORM_AUTHOR_IMAGE_BASE_URL:-http://localhq.ssrn.com}
+      - OLD_PLATFORM_AUTH_BASE_URL=${OLD_PLATFORM_AUTH_BASE_URL:-http://localhq.ssrn.com}
+      - SHIP_LOGS=false
+      - CACHE_VIEW_TEMPLATES=false
+  fake-search-service:
+    extends:
+      file: website/fake-search-service/docker-compose.yml
+      service: service
+  fake-old-platform:
+      extends:
+        file: ../../test/support/fake-old-platform/docker-compose.yml
+        service: service

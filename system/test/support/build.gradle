@@ -1,0 +1,29 @@
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile(
+            'junit:junit:4.12',
+            'org.slf4j:slf4j-api:1.7.25',
+            'ch.qos.logback:logback-classic:1.2.3',
+            'org.slf4j:jcl-over-slf4j:1.7.25',
+            'org.seleniumhq.selenium:selenium-chrome-driver:3.8.1',
+            'org.seleniumhq.selenium:selenium-support:2.52.0',
+            'org.apache.commons:commons-lang3:3.7',
+            'org.glassfish.jersey.core:jersey-client:2.25.1',
+            'com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:2.9.5',
+            'org.hamcrest:java-hamcrest:2.0.0.0',
+            'com.amazonaws:amazon-kinesis-client:1.9.0',
+            'org.json:json:20180130',
+            'com.jayway.jsonpath:json-path:2.3.0',
+            'com.jayway.jsonpath:json-path-assert:2.2.0',
+            'io.takari.junit:takari-cpsuite:1.2.7',
+            'commons-cli:commons-cli:1.4',
+            'commons-io:commons-io:2.6',
+            project('http'),
+            project('golden-data')
+    )
+}

@@ -1,0 +1,47 @@
+version: '2.1'
+services:
+  fake-cdn:
+    extends:
+      file: ../../test/support/fake-cdn/docker-compose.yml
+      service: service
+    ports:
+      - "80:80"
+      - "81:81"
+  fake-load-balancer:
+    extends:
+      file: ../../test/support/fake-load-balancer/docker-compose.yml
+      service: service
+  fake-kibana:
+    extends:
+      file: fake-kibana/docker-compose.yml
+      service: service
+    ports:
+      - 5601:5601
+  logging-index:
+    image: docker.elastic.co/elasticsearch/elasticsearch:5.3.0
+    cap_add:
+      - IPC_LOCK
+    ports:
+      - 9200:9200
+    environment:
+      - xpack.security.enabled=false
+      - cluster.name=logging-index
+      - ES_JAVA_OPTS=-Xms1g -Xmx1g
+    networks:
+      default:
+        aliases:
+          - logging-index.internal-service
+  fake-logstash-elb:
+      extends:
+        file: fake-logstash-elb/docker-compose.yml
+        service: service
+  logstash:
+    extends:
+      file: logstash/docker-compose-${LOGGING_DOCKER_COMPOSE_SERVICE_MODE:-build}.yml
+      service: service
+    ports:
+      - 5044:5044
+  fake-logging-client:
+    extends:
+      file: fake-logging-client/docker-compose-build.yml
+      service: service

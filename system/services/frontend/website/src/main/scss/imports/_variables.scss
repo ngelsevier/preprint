@@ -1,0 +1,64 @@
+// Site wide
+$mobile_breakpoint: 500px;
+$tablet_breakpoint: 850px;
+$site_full_width: 1170px;
+$wrapper_padding: 12px;
+
+// Old site breakpoints
+$breakpoint_large: 1200px;
+$breakpoint_med: 992px;
+$breakpoint_small: 768px;
+
+// Layout
+$section_padding: 70px;
+
+// Header
+$header_height: 60px;
+$header_height_small: 45px;
+
+$logo_width: 65px;
+
+$header_link_padding: 26px;
+$header_dropdown_shadow: 0 1px 1px 1px #d8dde6;
+
+// Colours
+$ssrn_blue: #0d4782;
+$header_hover_blue: #0a3968;
+$button_hover_blue: #336293;
+$link_blue: #0076d4;
+
+$ssrn_orange: #f5662d;
+
+$title_black: #222;
+
+$content_grey: #505050;
+$tertiary_font_grey: #898989;
+$search_sticky_grey: #f7f7f7;
+$border_grey: #d8dde6;
+$border_grey_dark: #bcc3cf;
+$background_grey: #f0f1f3;
+$social_link_grey: #999;
+$search_result_icon_grey: #d5d5d5;
+
+$silver: #ccc;
+$black: #000;
+$white: #fff;
+
+// Typography
+$main_header_size: 36px;
+$main_header_line_height: 40px;
+
+$default_font_size: 16px;
+$default_line_height: 16px;
+
+// Calcs
+$outer_horizontal_space: unquote("100% _ #{ $site_full_width }");
+$outer_horizontal_space_single: unquote("(#{ $outer_horizontal_space}) / 2");
+
+// Search
+$search_width: 700px;
+
+$search_box_padding_vertical: 12px;
+$search_box_padding_horizontal: 20px;
+
+$search_result_image_size: 44px;

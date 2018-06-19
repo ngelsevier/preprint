@@ -1,0 +1,164 @@
+plugins {
+    id 'com.github.johnrengelman.shadow' version '2.0.1'
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+
+ext {
+    portable_classpath = true
+}
+
+repositories {
+    mavenCentral()
+}
+
+sourceSets {
+    integrationTest {
+        java {
+            compileClasspath += main.output
+            runtimeClasspath += main.output
+            srcDirs = files('src/integration-test/java')
+        }
+
+        resources.srcDirs = files('src/integration-test/resources')
+    }
+
+    searchServiceContractTest {
+        java {
+            srcDirs = files('src/search-service-contract-test/java')
+        }
+
+        resources.srcDirs = files('src/search-service-contract-test/resources')
+    }
+
+    oldPlatformContractTest {
+        java {
+            srcDirs = files('src/old-platform-contract-test/java')
+        }
+
+        resources.srcDirs = files('src/old-platform-contract-test/resources')
+    }
+}
+
+configurations {
+    integrationTestCompile.extendsFrom compile
+    integrationTestRuntime.extendsFrom runtime
+}
+
+dependencies {
+    compile("io.dropwizard:dropwizard-core:${dropwizardVersion}",
+            "io.dropwizard:dropwizard-client:${dropwizardVersion}",
+            "io.dropwizard:dropwizard-views-freemarker:${dropwizardVersion}",
+            "io.dropwizard:dropwizard-assets:${dropwizardVersion}",
+            "io.dropwizard:dropwizard-auth:${dropwizardVersion}",
+            'commons-io:commons-io:2.6',
+            project(':shared:kms')
+    )
+
+    testCompile(
+            'junit:junit:4.12',
+            project(':test:support')
+    )
+
+    searchServiceContractTestCompile(
+            'junit:junit:4.12',
+            'org.hamcrest:java-hamcrest:2.0.0.0',
+            'com.jayway.jsonpath:json-path-assert:2.2.0',
+            "io.dropwizard:dropwizard-testing:${dropwizardVersion}",
+            project(':test:support'),
+            project('fake-search-service'),
+            project(':test:support:golden-data')
+    )
+
+    integrationTestCompile(
+            'junit:junit:4.12',
+            'org.hamcrest:java-hamcrest:2.0.0.0',
+            'com.jayway.jsonpath:json-path-assert:2.2.0',
+            "io.dropwizard:dropwizard-testing:${dropwizardVersion}",
+            project(':test:support'),
+            project('fake-search-service')
+    )
+
+    oldPlatformContractTestCompile(
+            project(':test:support:old-platform-contract-tests'),
+            project(':test:support:golden-data')
+    )
+}
+
+task searchServiceContractTest(type: Test) {
+    ext.interServiceContractTest = true
+    description = 'Runs the search service contract tests.'
+    group = 'verification'
+    testClassesDir = sourceSets.searchServiceContractTest.output.classesDir
+    classpath = sourceSets.searchServiceContractTest.runtimeClasspath
+    shouldRunAfter 'test'
+
+    if (project.hasProperty('contractTestRealService') && project.contractTestRealService) {
+        environment 'SEARCH_SERVICE_BASE_URL', 'http://search.internal-service'
+    }
+}
+
+task integrationTest(type: Test) {
+    description = 'Runs the integration tests.'
+    group = 'verification'
+    testClassesDir = sourceSets.integrationTest.output.classesDir
+    classpath = sourceSets.integrationTest.runtimeClasspath
+    shouldRunAfter 'test', 'searchServiceContractTest'
+}
+
+task oldPlatformContractTest(type: Test) {
+    description = 'Runs the old platform contract tests.'
+    group = 'verification'
+    testClassesDir = sourceSets.oldPlatformContractTest.output.classesDir
+    classpath = sourceSets.oldPlatformContractTest.runtimeClasspath
+    shouldRunAfter 'test'
+
+    exclude 'com/ssrn/test/support/standalone_test_runner/AutoScanningTestSuite*'
+}
+
+task searchServiceContractTestJar(type: com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar) {
+    from sourceSets.searchServiceContractTest.output
+    configurations = [project.configurations.searchServiceContractTestRuntime]
+    mergeServiceFiles()
+    manifest {
+        attributes 'Main-Class': 'com.ssrn.test.support.standalone_test_runner.TestRunner'
+    }
+    baseName = 'search-service-contract-tests'
+    classifier = null
+}
+
+def scssSourceDirectoryPath = new File(projectDir, 'src/main/scss')
+
+task compileCss(type: Exec) {
+    def sourceDirectory = scssSourceDirectoryPath
+    def outputDirectory = new File(sourceSets.main.output.resourcesDir, 'assets/css')
+
+    compileCss.inputs.dir(sourceDirectory)
+    compileCss.outputs.dir(outputDirectory)
+    compileCss.executable = 'sass'
+
+    def subcommand = project.hasProperty('watch') && project.watch ? '--watch': '--update'
+    compileCss.args subcommand, "${sourceDirectory}:${outputDirectory}"
+}
+
+classes.dependsOn compileCss
+
+idea {
+    module {
+        sourceDirs += scssSourceDirectoryPath
+    }
+}
+
+shadowJar {
+    from sourceSets.oldPlatformContractTest.output
+    configurations = [
+            project.configurations.oldPlatformContractTestRuntime,
+    ]
+    mergeServiceFiles()
+    manifest {
+        attributes 'Main-Class': 'com.ssrn.test.support.old_platform_contract_test.TestRunner'
+    }
+    baseName = 'old-platform-contract-tests'
+    classifier = null
+}

@@ -1,0 +1,4 @@
+---
+name: logging
+components: ['logstash']
+fake-services: ['fake-logging-client']

@@ -1,0 +1,12 @@
+version: '2.1'
+services:
+  service:
+    build: .
+    volumes:
+      - ./out/production/classes:/opt/service/classpath/classes
+      - ./out/production/internal-runtime-libraries:/opt/service/classpath/internal-libraries
+      - ./out/production/external-runtime-libraries:/opt/service/classpath/external-libraries
+    networks:
+      default:
+        aliases:
+          - fake-authors-instance

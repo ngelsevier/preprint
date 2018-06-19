@@ -1,0 +1,9 @@
+version: '2.1'
+services:
+  service:
+    environment:
+      - SIMULATED_ENVIRONMENT=true
+    networks:
+      default:
+        aliases:
+          - frontend-website-instance

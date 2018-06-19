@@ -1,0 +1,113 @@
+<html>
+<body data-abstract-id="{{abstractId}}">
+<div id="paperAuthor_{{ssrnAccountId}}" class="paperAuthors rollOver">
+    <a href="">{{ssrnAccountId}}</a>
+    <form id="authorForm" style="display: block">
+        <span>
+            <a title="Save &amp; Close this section" href="javascript: void(0);">Save</a>
+        </span>
+        <input id="txtcoAuthorEmail" type="text"/>
+        <input id="txtcoAuthorName" type="text"/>
+        <a href="" class="smallBtn">Search</a>
+        <div id="tblResultAuthors">
+            <a href="#" onclick="addAuthor({{firstAdditionalAuthorAccountId}})">Add Author</a>
+            <a href="#" onclick="addAuthor({{secondAdditionalAuthorAccountId}})">Add Author</a>
+            <a href="#" onclick="addAuthor({{thirdAdditionalAuthorAccountId}})">Add Author</a>
+        </div>
+        <div id="section31">
+            <div id="tblCoAuthors">
+                <a href="#" data-author-name="{{thirdAdditionalAuthorName}}" onclick="addAuthor({{thirdAdditionalAuthorAccountId}})">Add Author</a>
+            </div>
+        </div>
+        <table id="tblAssistants">
+            {{#authors}}
+                <td>
+                    <td>
+                        {{#isFirst}}
+                            <a href="javascript:void(0);" onclick="ChangeAuthOrder('down','{{authorId}}');">Down</a>
+                        {{/isFirst}}
+                        {{^isFirst}}
+                            <a href="javascript:void(0);" onclick="ChangeAuthOrder('up','{{authorId}}');">Up</a>
+                            {{^isLast}}
+                                <a href="javascript:void(0);" onclick="ChangeAuthOrder('down','{{authorId}}');">Down</a>
+                            {{/isLast}}
+                        {{/isFirst}}
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td><input type="radio" name="rdoAuthType_{{authorId}}"/>Author</td>
+                    <td></td>
+                    <td><a href="javascript:void(0);" onclick="AuthorChange('contactauthor','{{authorId}}');">Make Primary Contact</a></td>
+                    <td>
+                        <a title="Remove Author" href="javascript:void(0);"
+                           onclick="RemoveAuthor('{{authorId}}');">{{authorId}}</a>
+                    </td>
+                </tr>
+            {{/authors}}
+        </table>
+    </form>
+</div>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.10.0.min.js"></script>
+<script type="text/javascript">
+    function addAuthor(authorId) {
+        var abstractId = $('body').data('abstract-id');
+        var options = {
+            type: 'POST',
+            contentType: 'application/json',
+            url: '/submissions/add-author',
+            data: JSON.stringify({
+                authorId: authorId,
+                abstractId: abstractId
+            }),
+            success: function () {
+                window.parent.document.getElementById("iFrameAuthors").src = "iFrameAuthors2.cfm?AbstractID=" + abstractId + "&AuthorID=" + {{ssrnAccountId}};
+            }
+        };
+        $.ajax(options);
+    }
+
+    function AuthorChange(operation, authorId) {
+        //no op
+    }
+
+    function ChangeAuthOrder(direction, authorId) {
+        var abstractId = $('body').data('abstract-id');
+        var options = {
+            type: 'POST',
+            contentType: 'application/json',
+            url: '/submissions/move-author',
+            data: JSON.stringify({
+                direction: direction,
+                authorId: authorId,
+                abstractId: abstractId
+            }),
+            success: function () {
+                window.parent.document.getElementById("iFrameAuthors").src = "iFrameAuthors2.cfm?AbstractID=" + abstractId + "&AuthorID=" + {{ssrnAccountId}};
+            }
+        };
+        $.ajax(options);
+    }
+
+    function RemoveAuthor(authorId) {
+        var options = {
+            type: 'POST',
+            contentType: 'application/json',
+            url: '/submissions/remove-author',
+            data: JSON.stringify({
+                authorId: authorId,
+                abstractId: $('body').data('abstract-id')
+            }),
+            success: function () {
+                $("#tblAssistants").hide();
+                if (authorId == {{ssrnAccountId}}) {
+                    confirm("Are you sure");
+                }
+            }
+        };
+        $.ajax(options);
+    }
+
+</script>
+</body>
+</html>
+

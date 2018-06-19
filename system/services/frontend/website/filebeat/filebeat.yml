@@ -1,0 +1,23 @@
+filebeat:
+  prospectors:
+    -
+      paths:
+        - /var/log/frontend-website/frontend-website.log
+      input_type: log
+      multiline:
+        pattern: '^(TRACE|DEBUG|INFO|WARN|ERROR)[[:space:]]+\['
+        negate: true
+        match: after
+      fields:
+        service: frontend-website
+        version: ${VERSION}
+    -
+      paths:
+        - /var/log/frontend-website/access.log
+      document_type: request
+      fields:
+        service: frontend-website
+        version: ${VERSION}
+output:
+  logstash:
+    hosts: ["logstash.internal-service:80"]

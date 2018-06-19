@@ -1,0 +1,4 @@
+*
+!supervisord.conf
+!logstash.conf
+!log4j2.properties

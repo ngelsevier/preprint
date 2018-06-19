@@ -1,0 +1,147 @@
+version: '2.1'
+services:
+  fake-cdn:
+    extends:
+      file: test/support/fake-cdn/docker-compose.yml
+      service: service
+    ports:
+      - "80:80"
+      - "81:81"
+  fake-load-balancer:
+    extends:
+      file: test/support/fake-load-balancer/docker-compose.yml
+      service: service
+  fake-old-platform:
+    extends:
+      file: test/support/fake-old-platform/docker-compose.yml
+      service: service
+  frontend-website:
+    extends:
+      file: ${FRONTEND_SANDBOX_DIRECTORY_PATH:-.}/services/frontend/website/docker-compose-${FRONTEND_DOCKER_COMPOSE_SERVICE_MODE:-build}.yml
+      service: service
+    environment:
+      - OLD_PLATFORM_ARTICLE_PAGE_BASE_URL=http://localhq.ssrn.com
+      - OLD_PLATFORM_AUTHOR_PROFILE_PAGE_BASE_URL=http://localhq.ssrn.com
+      - OLD_PLATFORM_AUTHOR_IMAGE_BASE_URL=http://localhq.ssrn.com
+      - OLD_PLATFORM_AUTH_BASE_URL=http://localhq.ssrn.com
+      - CACHE_VIEW_TEMPLATES=false
+      - HTTP_REQUEST_LOG_LEVEL=FINE
+      - SHIP_LOGS=${SHIP_LOGS:-false}
+      - SEARCH_RESULT_PAGE_SIZE=${SEARCH_RESULT_PAGE_SIZE:-50}
+  search-api:
+    extends:
+      file: ${SEARCH_SANDBOX_DIRECTORY_PATH:-.}/services/search/api/docker-compose-${SEARCH_DOCKER_COMPOSE_SERVICE_MODE:-build}.yml
+      service: service
+    environment:
+      - ELASTICSEARCH_ENDPOINT=http://search-papers-index.oxford-north-1.es.amazonaws.local:9200
+      - AWS_ACCESS_KEY_ID=dummy
+      - AWS_SECRET_ACCESS_KEY=dummy
+      - SHIP_LOGS=${SHIP_LOGS:-false}
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:5.3.0
+    cap_add:
+      - IPC_LOCK
+    ports:
+      - 9200:9200
+    environment:
+      - xpack.security.enabled=false
+      - cluster.name=search-cluster
+      - ES_JAVA_OPTS=-Xms1g -Xmx1g
+    networks:
+      default:
+        aliases:
+          - search-papers-index.oxford-north-1.es.amazonaws.local
+          - logging-index
+  search-papers-consumer:
+    extends:
+      file: ${SEARCH_SANDBOX_DIRECTORY_PATH:-.}/services/search/papers-consumer/docker-compose-${SEARCH_DOCKER_COMPOSE_SERVICE_MODE:-build}.yml
+      service: service
+    environment:
+      - ELASTICSEARCH_ENDPOINT=http://search-papers-index.oxford-north-1.es.amazonaws.local:9200
+      - AWS_ACCESS_KEY_ID=dummy
+      - AWS_SECRET_ACCESS_KEY=dummy
+      - SHIP_LOGS=${SHIP_LOGS:-false}
+      - KINESIS_STREAM_NAME=papers
+      - KCL_APPLICATION_NAME=paperConsumer
+  postgres:
+    extends:
+      file: test/support/postgres/docker-compose.yml
+      service: service
+    ports:
+      - "5432:5432"
+  papers-emitter:
+    extends:
+      file: ${PAPERS_SANDBOX_DIRECTORY_PATH:-.}/services/papers/emitter/docker-compose-${PAPERS_DOCKER_COMPOSE_SERVICE_MODE:-build}.yml
+      service: service
+    environment:
+      - MAX_CONCURRENT_EMISSIONS=4
+      - SHIP_LOGS=${SHIP_LOGS:-false}
+      - KINESIS_STREAM_NAME=papers
+  authors-updates-publisher:
+    extends:
+      file: ${AUTHORS_SANDBOX_DIRECTORY_PATH:-.}/services/authors/updates-publisher/docker-compose-${AUTHORS_DOCKER_COMPOSE_SERVICE_MODE:-build}.yml
+      service: service
+    environment:
+      - MAX_CONCURRENT_EMISSIONS=4
+      - SHIP_LOGS=${SHIP_LOGS:-false}
+      - KINESIS_STREAM_NAME=author-updates
+  kinesis:
+    extends:
+      file: test/support/fake-kinesis/docker-compose.yml
+      service: service
+    ports:
+      - "4567:4567"
+      - "8000:8000"
+  papers-replicator:
+    extends:
+      file: ${PAPERS_SANDBOX_DIRECTORY_PATH:-.}/services/papers/replicator/docker-compose-${PAPERS_DOCKER_COMPOSE_SERVICE_MODE:-build}.yml
+      service: service
+    environment:
+      - EVENTS_FEED_BASE_URL=http://fake-old-platform
+      - EVENTS_FEED_HTTP_BASIC_AUTH_USERNAME=username
+      - EVENTS_FEED_HTTP_BASIC_AUTH_PASSWORD=password
+      - HTTP_REQUEST_LOG_LEVEL=FINE
+      - SHIP_LOGS=${SHIP_LOGS:-false}
+  authors-replicator:
+    extends:
+      file: ${AUTHORS_SANDBOX_DIRECTORY_PATH:-.}/services/authors/replicator/docker-compose-${AUTHORS_DOCKER_COMPOSE_SERVICE_MODE:-build}.yml
+      service: service
+    environment:
+      - EVENTS_FEED_BASE_URL=http://fake-old-platform
+      - EVENTS_FEED_HTTP_BASIC_AUTH_USERNAME=username
+      - EVENTS_FEED_HTTP_BASIC_AUTH_PASSWORD=password
+      - HTTP_REQUEST_LOG_LEVEL=FINE
+      - SHIP_LOGS=${SHIP_LOGS:-false}
+  papers-replicator-scheduler:
+    extends:
+      file: services/papers/replicator/paper-scheduler/docker-compose.yml
+      service: service
+    environment:
+      - JOB_BATCH_SIZE=50
+      - DATABASE_UPSERT_BATCH_SIZE=25
+  papers-events-replicator-scheduler:
+    extends:
+      file: services/papers/replicator/event-scheduler/docker-compose.yml
+      service: service
+  authors-replicator-scheduler:
+    extends:
+      file: ${AUTHORS_SANDBOX_DIRECTORY_PATH:-.}/services/authors/replicator/author-scheduler/docker-compose.yml
+      service: service
+    environment:
+      - JOB_BATCH_SIZE=50
+      - DATABASE_UPSERT_BATCH_SIZE=25
+  authors-events-replicator-scheduler:
+    extends:
+      file: services/authors/replicator/event-scheduler/docker-compose.yml
+      service: service
+  search-author-updates-subscriber:
+      extends:
+        file: ${SEARCH_SANDBOX_DIRECTORY_PATH:-.}/services/search/author-updates-subscriber/docker-compose-${SEARCH_DOCKER_COMPOSE_SERVICE_MODE:-build}.yml
+        service: service
+      environment:
+        - ELASTICSEARCH_ENDPOINT=http://search-papers-index.oxford-north-1.es.amazonaws.local:9200
+        - AWS_ACCESS_KEY_ID=dummy
+        - AWS_SECRET_ACCESS_KEY=dummy
+        - SHIP_LOGS=${SHIP_LOGS:-false}
+        - KINESIS_STREAM_NAME=author-updates
+        - KCL_APPLICATION_NAME=authorUpdatesSubscriber

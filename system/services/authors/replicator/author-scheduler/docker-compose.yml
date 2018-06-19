@@ -1,0 +1,7 @@
+version: '2.1'
+services:
+  service:
+    build: .
+    volumes:
+      - ./job.py:/opt/scheduler/job.py
+      - ./scheduler.sh:/opt/scheduler/scheduler.sh

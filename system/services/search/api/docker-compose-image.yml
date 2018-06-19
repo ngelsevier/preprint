@@ -1,0 +1,7 @@
+version: '2.1'
+services:
+  service:
+    image: ${SEARCH_API_IMAGE}
+    extends:
+      file: docker-compose.yml
+      service: service

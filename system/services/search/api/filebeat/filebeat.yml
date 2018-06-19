@@ -1,0 +1,23 @@
+filebeat:
+  prospectors:
+    -
+      paths:
+        - /var/log/search-api/search-api.log
+      input_type: log
+      multiline:
+        pattern: '^(TRACE|DEBUG|INFO|WARN|ERROR)[[:space:]]+\['
+        negate: true
+        match: after
+      fields:
+        service: search-api
+        version: ${VERSION}
+    -
+      paths:
+        - /var/log/search-api/access.log
+      document_type: request
+      fields:
+        service: search-api
+        version: ${VERSION}
+output:
+  logstash:
+    hosts: ["logstash.internal-service:80"]

@@ -1,0 +1,70 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "io.spring.gradle:dependency-management-plugin:1.0.0.RC2"
+    }
+}
+
+apply plugin: "io.spring.dependency-management"
+apply plugin: 'java'
+
+ext {
+    portable_classpath = true
+}
+
+repositories {
+    mavenCentral()
+}
+
+sourceSets {
+    integrationTest {
+        java {
+            compileClasspath += main.output
+            runtimeClasspath += main.output
+            srcDirs = files('src/integration-test/java')
+        }
+
+        resources.srcDirs = files('src/integration-test/resources')
+    }
+}
+
+configurations {
+    integrationTestCompile.extendsFrom compile
+    integrationTestRuntime.extendsFrom runtime
+}
+
+dependencyManagement {
+    imports {
+        mavenBom 'com.amazonaws:aws-java-sdk-bom:1.11.312'
+    }
+}
+
+dependencies {
+    compile(
+            'org.json:json:20180130',
+            "io.dropwizard:dropwizard-core:${dropwizardVersion}",
+            'com.amazonaws:aws-java-sdk-kinesis:1.11.312',
+            'com.fasterxml.jackson.dataformat:jackson-dataformat-cbor:2.9.5', // Added to match jackson-core version (required by com.amazonaws:aws-java-sdk-kinesis:1.11.312)
+            "io.dropwizard:dropwizard-jdbi:${dropwizardVersion}",
+            project(':shared:dropwizard'),
+            project(':shared:kms'),
+            parent.project('shared')
+    )
+
+    integrationTestCompile(
+            'junit:junit:4.12',
+            'com.jayway.jsonpath:json-path-assert:2.2.0',
+            project(':test:support'),
+            parent.project('shared:test-support')
+    )
+}
+
+task integrationTest(type: Test) {
+    description = 'Runs the integration tests.'
+    group = 'verification'
+    testClassesDir = sourceSets.integrationTest.output.classesDir
+    classpath = sourceSets.integrationTest.runtimeClasspath
+    shouldRunAfter 'test'
+}

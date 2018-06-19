@@ -1,0 +1,54 @@
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+}
+
+sourceSets {
+    integrationTest {
+        java {
+            compileClasspath += main.output
+            runtimeClasspath += main.output
+            srcDirs = files('src/integration-test/java')
+        }
+
+        resources.srcDirs = files('src/integration-test/resources')
+    }
+}
+
+configurations {
+    integrationTestCompile.extendsFrom compile
+    integrationTestRuntime.extendsFrom runtime
+}
+
+dependencies {
+    compile(
+            'org.slf4j:slf4j-api:1.7.25',
+            'org.postgresql:postgresql:42.2.2',
+            'joda-time:joda-time:2.9.9',
+            'org.jdbi:jdbi:2.78',
+            'com.fasterxml.jackson.core:jackson-databind:2.9.5',
+            project(':shared:concurrency')
+    )
+
+    testCompile(
+            'junit:junit:4.12',
+            project('test-support')
+    )
+
+    integrationTestCompile(
+            'junit:junit:4.12',
+            'org.hamcrest:java-hamcrest:2.0.0.0',
+            'org.json:json:20180130',
+            project(':test:support'),
+            project('test-support')
+    )
+}
+
+task integrationTest(type: Test) {
+    description = 'Runs the integration tests.'
+    group = 'verification'
+    testClassesDir = sourceSets.integrationTest.output.classesDir
+    classpath = sourceSets.integrationTest.runtimeClasspath
+    shouldRunAfter 'test'
+}

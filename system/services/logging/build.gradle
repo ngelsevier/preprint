@@ -1,0 +1,38 @@
+apply plugin: 'java'
+
+ext {
+    serviceRoot = true
+}
+
+repositories {
+    mavenCentral()
+}
+
+sourceSets {
+    serviceTest {
+        java {
+            srcDirs = files('src/service-test/java')
+        }
+
+        resources.srcDirs = files('src/service-test/resources')
+    }
+}
+
+dependencies {
+    serviceTestCompile(
+            'junit:junit:4.12',
+            'org.hamcrest:java-hamcrest:2.0.0.0',
+            'com.jayway.jsonpath:json-path:2.3.0',
+            'com.jayway.jsonpath:json-path-assert:2.2.0',
+            project(':test:support'),
+            project('fake-logging-client')
+    )
+}
+
+task serviceTest(type: Test) {
+    description = 'Runs the service tests.'
+    group = 'verification'
+    testClassesDir = sourceSets.serviceTest.output.classesDir
+    classpath = sourceSets.serviceTest.runtimeClasspath
+    shouldRunAfter subprojects.collect { it.tasks.withType(Test) }
+}

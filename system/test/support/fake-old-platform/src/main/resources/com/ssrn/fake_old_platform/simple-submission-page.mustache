@@ -1,0 +1,158 @@
+<html>
+<body data-abstract-id="{{abstractId}}">
+<div id="headerId">
+    <a href="/submissions/CreateNewAbstract.cfm" id="submitPaperLink">Submit a paper</a>
+    <a id="profile">Profile</a>
+    <a id="personal" href="/Participant.cfm?rectype=edit&partid={{ssrnAccountId}}">Personal Info</a>
+</div>
+<p>Simple Submission</p>
+<div class="warning"><input value="Continue" type="button"/></div>
+<div id="areaAvailability">
+<a id="EditAvailability" title="Edit Availability" >
+<b>Availability:</b>Publicly Available in the SSRN eLibrary
+</a>
+</div>
+<div id="areaAvailabilityEdit">
+<input type="radio" name="optPublicUse" onclick="setPubAvailable()">Publicly Available in the SSRN eLibrary</input>
+<input type="radio" name="optPublicUse" onclick="setPriAvailable()">Privately Available (distributed by me)</input>
+</div>
+<div id="paperTitle">
+    <p><a id="EditTitleLink" href="#">Edit Title</a></p>
+</div>
+<div id="titleForm">
+    <input type="text" value="[enter Paper Title]" id="ab_title"/>
+    <a href="#">Save</a>
+</div>
+
+<iframe id="iFrameAuthors" src="/submissions/iFrameAuthors2.cfm?AbstractID={{abstractId}}&AuthorID={{ssrnAccountId}}">
+</iframe>
+
+<!--
+style="display: block; vertical-align: top;"
+-->
+<div id="abstractArea">
+<div id="abHeader">
+    <p id="ab_content_Show"/>
+    <input type="checkbox" onclick="return false;"/> Edit Abstract, Keywords, and Classification
+</div>
+<div class="editArea" id="abstractForm" style="display: none">
+    <form name="form7" id="form7">
+        <input id="ab_content" type="text" value=""/>
+        <input id="ab_keywords" type="text" value=""/>
+        <a href="#" title="Save & Close this section">Save</a>
+    </form>
+</div>
+</div>
+
+<div id="paperClass">eJournal Classifications
+    <!--<div id="eClassHeader"></div>-->
+</div>
+<div id="classForm">
+    <input type="radio" name="SSRNeClass" value="T">Have SSRN select eJournal Classifications for this paper</input>
+    <a title="Save & Close this section" href="#">Save</a>
+</div>
+</div>
+</div>
+
+<div id="submitDiv">
+    {{#isRevision}}
+        <input type="button" id="btnSubmit" value="Submit Revision"/>
+    {{/isRevision}}
+    {{^isRevision}}
+        <input type="button" id="btnSubmit" value="Submit to SSRN"/>
+    {{/isRevision}}
+    <div id="explainText">
+        <form method="post" action="/submissions/SimpleSubmitDB.cfm" name="submitForm">
+           <input type="hidden" id="AbstractID" name="AbstractID" value="{{abstractId}}">
+           <input type="hidden" id="ParticipantID" name="ParticipantID" value="{{ssrnAccountId}}">
+           <input type="checkbox" id="certifyTrue" value="Confirm to submit"/>
+           {{#isRevision}}
+             <input type="button" value="Submit Revision" onclick="document.submitForm.submit()"/>
+           {{/isRevision}}
+           {{^isRevision}}
+            <input type="button" value="Submit to SSRN" onclick="document.submitForm.submit()"/>
+           {{/isRevision}}
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.10.0.min.js"></script>
+<script type="text/javascript">
+    function setPriAvailable() {
+        var options = {
+            type: 'POST',
+            contentType: 'application/json',
+            url: '/submissions/make-paper-private',
+            processData: false,
+            data: $('body').data('abstract-id'),
+        };
+        $.ajax(options);
+    }
+
+    function setPubAvailable() {
+        var options = {
+            type: 'POST',
+            contentType: 'application/json',
+            url: '/submissions/make-paper-public',
+            processData: false,
+            data: $('body').data('abstract-id'),
+        };
+        $.ajax(options);
+    }
+</script>
+<script type="text/javascript">
+    $(function () {
+        var paperTitleCssSelector = '#paperTitle';
+        var abstractContentCssSelector = '#abstractForm';
+
+        $('#EditTitleLink').click(function () {
+            $(paperTitleCssSelector).hide();
+        });
+
+        $('#abHeader').click(function () {
+            $(abstractContentCssSelector).show();
+        });
+
+        $('#ab_keywords').blur(function () {
+            var options = {
+                type: 'POST',
+                contentType: 'application/json',
+                url: '/submissions/change-keywords',
+                data: JSON.stringify({
+                    keywords: $('#ab_keywords').val(),
+                    abstractId: $('body').data('abstract-id')
+                }),
+                success: function () {
+                    $(abstractContentCssSelector).hide();
+                }
+            };
+
+            $.ajax(options);
+        });
+
+        $('#titleForm a').click(function () {
+            var options = {
+                type: 'POST',
+                contentType: 'application/json',
+                url: '/submissions/change-title',
+                data: JSON.stringify({
+                    title: $('#ab_title').val(),
+                    abstractId: $('body').data('abstract-id')
+                }),
+                success: function () {
+                    $(paperTitleCssSelector).show();
+                }
+            };
+
+            $.ajax(options);
+        });
+
+        $('#form7 a').click(function () {
+            $(abstractContentCssSelector).hide();
+        });
+    });
+</script>
+
+
+</body>
+</html>

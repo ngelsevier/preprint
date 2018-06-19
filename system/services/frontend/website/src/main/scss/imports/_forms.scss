@@ -1,0 +1,31 @@
+input,
+select,
+textarea {
+    margin: 0;
+    padding: 8px;
+    border: 1px solid $border_grey;
+    outline: 0;
+    background: transparent;
+    color: $content_grey;
+}
+
+option {
+    padding: 8px;
+}
+
+.input-button-wrapper {
+    border: 1px solid $border_grey;
+    input,
+    button {
+        border: none;
+        background: transparent;
+        vertical-align: middle;
+    }
+    button {
+        color: $ssrn_blue;
+    }
+}
+
+form {
+    margin-bottom: 0;
+}

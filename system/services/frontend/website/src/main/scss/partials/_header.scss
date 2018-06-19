@@ -1,0 +1,431 @@
+header {
+    position: relative;
+    height: $header_height;
+    width: 100%;
+    background: $ssrn_blue;
+    color: $white;
+    z-index: 9;
+    @include breakpoint($breakpoint_small) {
+        position: fixed;
+        & + * {
+            margin-top: $header_height_small;
+        }
+        height: $header_height_small;
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            z-index: 103;
+            background: url('../images/ssrn-logo.png') $wrapper_padding 50% no-repeat $ssrn_blue;
+        }
+    }
+    .wrapper {
+        position: relative;
+        @include flexbox;
+        @include align-items(center);
+        @include justify-content(space-between);
+        height: 100%;
+    }
+    a {
+        color: $white;
+    }
+    .main-menu {
+        height: 100%;
+        & > ul {
+            @include flexbox;
+            @include align-items(center);
+            height: 100%;
+            & > li {
+                position: relative;
+                height: 100%;
+                @include breakpoint($breakpoint_small) {
+                    &:first-child {
+                        display: none;
+                    }
+                }
+                & > a {
+                    @include flexbox;
+                    @include align-items(center);
+                    height: 100%;
+                    color: $white;
+                    text-decoration: none;
+                    font-size: 14px;
+                    letter-spacing: 0.6px;
+                    &:not(.logo) {
+                        padding: 1px $header_link_padding 0; //hack to match off centre old site
+                        background: transparent;
+                        @include transition(background-color 0.2s ease);
+                        text-transform: uppercase;
+                        &:hover {
+                            background-color: $header_hover_blue;
+                        }
+                        @include breakpoint($breakpoint_large) {
+                            padding-left: 13px;
+                            padding-right: 13px;
+                        }
+                        @include breakpoint($breakpoint_med) {
+                            padding-left: 4px;
+                            padding-right: 4px;
+                            &:not([href]) {
+                                display: none;
+                            }
+                        }
+                    }
+                    &.logo {
+                        @include flexbox;
+                        @include align-items(center);
+                        width: $logo_width;
+                        margin-right: $header_link_padding + 6px;
+                        img {
+                            margin-top: -1px; //hack to match off centre old site
+                            @include breakpoint($breakpoint_small) {
+                                margin-top: 4px; //hack to match off centre old site
+                            }
+                        }
+                        @include breakpoint($breakpoint_med) {
+                            margin-right: 0;
+                        }
+                    }
+                }
+                ul {
+                    position: absolute;
+                    top: 100%;
+                    width: auto;
+                    left: -99999px;
+                    background: $white;
+                    box-shadow: $header_dropdown_shadow;
+                    padding: 16px 29px 20px;
+                    min-width: 200px;
+                    opacity: 0;
+                    @include transition(opacity 0.2s ease);
+                    z-index: 110;
+                    li {
+                        a {
+                            color: $content_grey;
+                            text-decoration: none;
+                            font-size: 18px;
+                            letter-spacing: 0;
+                            line-height: 44px;
+                            @include transition(color 0.2s ease);
+                            &:hover {
+                                color: $ssrn_orange;
+                            }
+                        }
+                    }
+                }
+                &:hover,
+                &[focused="true"] {
+                    ul {
+                        left: 0;
+                        opacity: 1;
+                    }
+                }
+            }
+            @include breakpoint($breakpoint_small) {
+                position: fixed;
+                top: $header_height_small;
+                left: 0;
+                width: 100%;
+                background: $white;
+                @include flex-direction(column);
+                z-index: 99;
+                @include transform(translateY(-100%));
+                @include transition(transform 0.5s ease);
+                &[data-open="true"] {
+                    @include transform(translateY(0));
+                }
+                & > li {
+                    height: auto;
+                    width: 100%;
+                    background: $white;
+                    & > a:not(.logo) {
+                        padding: 15px;
+                        color: $ssrn_blue;
+                        font-size: 16px;
+                        &:hover {
+                            background: $white;
+                            color: $ssrn_blue;
+                            text-decoration: underline;
+                        }
+                        a:not([href]) {
+                            display: none;
+                        }
+                    }
+                    & > ul {
+                        position: relative;
+                        top: 0;
+                        left: 0;
+                        opacity: 1;
+                        @include box-shadow(none);
+                        padding: 0;
+                        li {
+                            a {
+                                display: block;
+                                color: $ssrn_blue;
+                                text-transform: uppercase;
+                                font-size: 16px;
+                                padding: 0 15px;
+                                &:hover {
+                                    color: $ssrn_blue;
+                                    text-decoration: underline;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .user-menu {
+        position: relative;
+        @include flex-shrink(0);
+        z-index: 104;
+        ul {
+            @include flexbox;
+            @include justify-content(flex-end);
+            @include align-items(center);
+            margin-bottom: 2px; //hack to match off centre old site
+            @include breakpoint($breakpoint_small) {
+                margin-bottom: 0;
+            }
+            li {
+                &:first-child, // Cart button
+                &:nth-child(2) { // Profile button
+                    display: none;
+                }
+                &:nth-child(3) { // Register button
+                    margin-right: 4px;
+                }
+                &:last-child {
+                    display: none;
+                    @include breakpoint($breakpoint_small) {
+                        display: block;
+                    }
+                }
+                a.cart {
+                    display: block;
+                    margin: 5px 17px 0 0; //hack to match off centre old site
+                    text-decoration: none;
+                    & > * {
+                        font-size: 22px;
+                        line-height: 26px;
+                    }
+                    @include breakpoint($breakpoint_small) {
+                        display: none;
+                    }
+                }
+                a.hamburger {
+                    @include flexbox;
+                    @include align-items(center);
+                    text-decoration: none;
+                    margin: 0 -8px 0 4px; //hack to match off centre old site
+                    cursor: pointer;
+                    & > * {
+                        font-size: 42px;
+                        line-height: 26px;
+                    }
+                }
+                .button-wrapper a.button {
+                    font-size: 14px;
+                    @include breakpoint($breakpoint_small) {
+                        padding: 13px 15px 8px;
+                    }
+                }
+            }
+        }
+    }
+    .auth-menu {
+        display: none;
+    }
+    &[data-authenticated="true"] {
+        .main-menu {
+            @include flex-shrink(0);
+        }
+        .user-menu {
+            width: 100%;
+            @include flex-shrink(1);
+            padding: 0 4px 0 9px; // hack to match off centre current header
+            ul {
+                @include flexbox;
+                @include justify-content(space-between);
+                li {
+                    &:first-child {
+                        display: block;
+                        margin-top: 2px; // hack to match off centre current header
+                    }
+                    &:nth-child(2) {
+                        display: block;
+                    }
+                    &:nth-child(3),
+                    &:nth-child(4) {
+                        display: none;
+                    }
+                    .profile {
+                        &::before {
+                            content: "";
+                            background: #265a8f;
+                            height: 22px;
+                            width: 1px;
+                            margin-right: 19px;
+                        }
+                        @include flexbox;
+                        @include align-items(center);
+                        cursor: pointer;
+                        margin: 12px -4px 0 0; // hack to match off centre current header
+                        span {
+                            color: $border_grey;
+                            margin: 6px 13px 0 0; // hack to match off centre current header
+                            line-height: 26px; // hack to match off centre current header
+                            max-width: 110px;
+                            text-overflow: ellipsis;
+                            white-space: nowrap;
+                            overflow: hidden;
+                        }
+                        i {
+                            font-size: 22px;
+                        }
+                    }
+                }
+                @include breakpoint($breakpoint_small) {
+                    @include flex-direction(row-reverse);
+                    @include justify-content(flex-start);
+                    li {
+                        &:first-child {
+                            display: none;
+                        }
+                        .profile {
+                            margin: 0 0 0 25px;
+                            &::before,
+                            span {
+                                display: none;
+                            }
+                            i {
+                                font-size: 26px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .auth-menu {
+            position: absolute;
+            top: $header_height;
+            right: 12px; // hack to match off centre current header
+            width: 245px;
+            &[data-open="true"] {
+                display: block;
+                z-index: 101;
+            }
+            &::before {
+                position: relative;
+                display: block;
+                content: '';
+                height: 21px;
+                width: 100%;
+                background: url('../images/sign-up-line.png') 100% 50% no-repeat transparent;
+            }
+            a {
+                display: block;
+                padding: 12px 36px;
+                font-size: 16px;
+                line-height: 16px;
+                color: $link_blue;
+                text-decoration: none;
+            }
+            ul {
+                background: $white;
+                padding: 16px 0;
+                box-shadow: 1px 1px 1px 0 $border_grey;
+                border-left: 1px solid $border_grey;
+                li {
+                    padding: 0 20px;
+                    &:last-child {
+                        margin-top: 11px;
+                        border-top: 1px solid $border_grey;
+                        a {
+                            @include flexbox;
+                            @include align-items(center);
+                            @include justify-content(flex-start);
+                            padding-top: 16px;
+                            padding-bottom: 11px;
+                            i {
+                                position: relative;
+                                margin-bottom: 3px; // hack to match off centre current header
+                                margin-right: 11px;
+                            }
+                        }
+                    }
+                }
+            }
+            @include breakpoint($breakpoint_small) {
+                display: block;
+                position: fixed;
+                top: $header_height_small;
+                left: 0;
+                height: 100%;
+                width: 100%;
+                background: $white;
+                z-index: 99;
+                @include transform(translateY(-100%));
+                @include transition(transform 0.5s ease);
+                &[data-open="true"] {
+                    @include transform(translateY(0));
+                }
+                &::before {
+                    content: 'Your Account';
+                    background: none;
+                    color: $content_grey;
+                    padding: 0 25px;
+                    margin-top: 21px;
+                    font-size: 23px;
+                    letter-spacing: -1px;
+                    font-weight: 700;
+                    -webkit-font-smoothing: antialiased;
+                }
+                ul {
+                    padding: 10px 0;
+                    box-shadow: none;
+                    li {
+                        a {
+                            padding: 12px 5px 10px;
+                            font-size: 18px;
+                            line-height: 18px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+#sticky-search {
+    border-bottom: 1px solid $border_grey;
+    background: $search_sticky_grey;
+    padding: 5px 0;
+    .wrapper {
+        @include flexbox;
+        @include align-items(center);
+        @include justify-content(space-between);
+    }
+    input {
+        font-size: 20px;
+        line-height: 20px;
+    }
+    .icon {
+        font-size: 28px;
+        line-height: 26px;
+    }
+    a {
+        color: $content_grey;
+        text-decoration: none;
+        &:hover {
+            text-decoration: underline;
+        }
+        @include breakpoint(480px) {
+            display: none;
+        }
+    }
+}

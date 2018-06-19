@@ -1,0 +1,20 @@
+filebeat:
+  prospectors:
+    -
+      paths:
+        - /var/log/service/service.log
+      input_type: log
+      multiline:
+        pattern: '^(TRACE|DEBUG|INFO|WARN|ERROR)[[:space:]]+\['
+        negate: true
+        match: after
+      fields:
+        service: fake-logging-client
+        version: ${VERSION}
+    -
+      paths:
+        - /var/log/service/access.log
+      document_type: request
+output:
+  logstash:
+    hosts: ["logstash.internal-service:80"]

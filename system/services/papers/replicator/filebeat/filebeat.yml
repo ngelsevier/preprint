@@ -1,0 +1,23 @@
+filebeat:
+  prospectors:
+    -
+      paths:
+        - /var/log/replicator/replicator.log
+      input_type: log
+      multiline:
+        pattern: '^(TRACE|DEBUG|INFO|WARN|ERROR)[[:space:]]+\['
+        negate: true
+        match: after
+      fields:
+        service: papers-replicator
+        version: ${VERSION}
+    -
+      paths:
+        - /var/log/replicator/access.log
+      document_type: request
+      fields:
+        service: papers-replicator
+        version: ${VERSION}
+output:
+  logstash:
+    hosts: ["logstash.internal-service:80"]

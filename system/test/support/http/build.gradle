@@ -1,0 +1,15 @@
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile(
+            'org.apache.httpcomponents:httpclient:4.5.5',
+            'org.glassfish.jersey.core:jersey-client:2.25.1',
+            'com.jayway.jsonpath:json-path:2.3.0',
+            'com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:2.9.5',
+            'org.hamcrest:java-hamcrest:2.0.0.0',
+    )
+}

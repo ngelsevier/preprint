@@ -1,0 +1,4 @@
+---
+name: authors
+components: ['replicator', 'updates-publisher']
+fake-services: ['/test/support/fake-old-platform']

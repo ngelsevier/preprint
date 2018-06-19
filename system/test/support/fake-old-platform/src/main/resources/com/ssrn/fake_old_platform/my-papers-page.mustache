@@ -1,0 +1,41 @@
+<html>
+<body>
+<table>
+    <tr class="TableHeader">
+        <th>Edit</th>
+        <th>Abstract ID</th>
+        <th>Title</th>
+    </tr>
+    {{#abstracts}}
+        <tr>
+            <td id="dEdit_{{ id }}"><a href="{{ submissionPageUrl }}">Edit</a></td>
+            <td>{{id}}</td>
+            <td>{{title}}</td>
+        </tr>
+    {{/abstracts}}
+</table>
+
+<table>
+    <tr class="TableHeader">
+        <th>Revise</th>
+        <th>Abstract ID</th>
+        <th>Title</th>
+        <th>Modify</th>
+    </tr>
+    {{#publiclyAvailablePapers}}
+        <tr>
+            <td id="dEdit_{{ id }}">Revise <img src="images/revise.gif" onclick="window.location.href='/submissions/StartRevision.cfm?AbstractID={{id}}'"/></td>
+            <td>{{id}}</td>
+            <td>{{title}}</td>
+            <td>
+                <a href="javascript:void(0);"
+                   onclick="window.open('ProcessRemove.cfm?abid={{id}}');">
+                    <img src="Images/Modify.gif">
+                </a>
+            </td>
+        </tr>
+    {{/publiclyAvailablePapers}}
+</table>
+
+</body>
+</html>

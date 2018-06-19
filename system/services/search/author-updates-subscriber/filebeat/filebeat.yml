@@ -1,0 +1,17 @@
+filebeat:
+  prospectors:
+    -
+      paths:
+        - /var/log/author-updates-subscriber/author-updates-subscriber.log
+      input_type: log
+      multiline:
+        pattern: '^(TRACE|DEBUG|INFO|WARN|ERROR)[[:space:]]+\['
+        negate: true
+        match: after
+        max_bytes: 10000
+      fields:
+        service: author-updates-subscriber
+        version: ${VERSION}
+output:
+  logstash:
+    hosts: ["logstash.internal-service:80"]

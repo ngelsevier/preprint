@@ -1,0 +1,56 @@
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+}
+
+sourceSets {
+    integrationTest {
+        java {
+            compileClasspath += main.output
+            runtimeClasspath += main.output
+            srcDirs = files('src/integration-test/java')
+        }
+
+        resources.srcDirs = files('src/integration-test/resources')
+    }
+}
+
+configurations {
+    integrationTestCompile.extendsFrom compile
+    integrationTestRuntime.extendsFrom runtime
+    testSupportCompile.extendsFrom compile
+    testSupportRuntime.extendsFrom runtime
+}
+
+dependencies {
+    compile(
+            'org.elasticsearch.client:rest:5.5.3',
+            'com.jayway.jsonpath:json-path:2.3.0',
+            'com.fasterxml.jackson.core:jackson-annotations:2.9.5',
+            'com.fasterxml.jackson.core:jackson-databind:2.9.5',
+            'com.amazonaws:aws-java-sdk-cloudwatch:1.11.312'
+    )
+
+    integrationTestCompile(
+            'junit:junit:4.12',
+            'org.json:json:20180130',
+            project(':test:support'),
+            project('test-support')
+    )
+
+    testCompile(
+            'junit:junit:4.12',
+            'org.hamcrest:java-hamcrest:2.0.0.0',
+            'org.mockito:mockito-core:2.18.0',
+            parent.project('shared:test-support')
+    )
+}
+
+task integrationTest(type: Test) {
+    description = 'Runs the integration tests.'
+    group = 'verification'
+    testClassesDir = sourceSets.integrationTest.output.classesDir
+    classpath = sourceSets.integrationTest.runtimeClasspath
+    shouldRunAfter 'test'
+}

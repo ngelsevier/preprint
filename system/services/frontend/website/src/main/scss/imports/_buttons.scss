@@ -1,0 +1,40 @@
+.button-wrapper {
+    a.button,
+    input[type="submit"],
+    button {
+        position: relative;
+        display: block;
+        padding: 15px 24px 11px;
+        font-size: 16px;
+        color: $white;
+        text-align: center;
+        text-decoration: none;
+        text-transform: uppercase;
+        cursor: pointer;
+        @include transition(all 0.2s ease);
+        background: $header_hover_blue;
+        border: 1px solid $button_hover_blue;
+        &:hover {
+            background-color: $button_hover_blue;
+        }
+        &.original-case {
+            text-transform: none;
+        }
+        &.clear {
+            border: 1px solid $link_blue;
+            color: $link_blue;
+            background: transparent;
+            &:hover {
+                border-color: $ssrn_orange;
+                color: $ssrn_orange;
+            }
+        }
+    }
+    &.inline {
+        a.button,
+        input[type="submit"],
+        button {
+            display: inline-block;
+        }
+    }
+}

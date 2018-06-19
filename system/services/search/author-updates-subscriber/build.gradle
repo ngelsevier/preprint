@@ -1,0 +1,95 @@
+plugins {
+    id 'com.github.johnrengelman.shadow' version '2.0.1'
+}
+
+apply plugin: 'java'
+
+ext {
+    portable_classpath = true
+}
+
+repositories {
+    mavenCentral()
+}
+
+sourceSets{
+
+    authorServiceContractTest {
+        java {
+            srcDirs = files('src/author-service-contract-test/java')
+        }
+
+        resources.srcDirs = files('src/author-service-contract-test/resources')
+    }
+    integrationTest {
+        java {
+            compileClasspath += main.output
+            runtimeClasspath += main.output
+            srcDirs = files('src/integration-test/java')
+        }
+
+        resources.srcDirs = files('src/integration-test/resources')
+    }
+}
+
+
+configurations {
+    integrationTestCompile.extendsFrom compile
+    integrationTestRuntime.extendsFrom runtime
+}
+
+dependencies {
+    compile(
+            "io.dropwizard:dropwizard-core:${dropwizardVersion}",
+            'com.amazonaws:amazon-kinesis-client:1.9.0',
+            'com.fasterxml.jackson.dataformat:jackson-dataformat-cbor:2.9.5', // Added to match jackson-core version (required by com.amazonaws:aws-java-sdk-kinesis:1.11.312)
+            'org.slf4j:jul-to-slf4j:1.7.25',
+            parent.project('shared'),
+            project(':shared:dropwizard')
+    )
+    testCompile(
+            'junit:junit:4.12',
+            'org.hamcrest:java-hamcrest:2.0.0.0',
+            'org.mockito:mockito-core:2.18.0',
+            parent.project('shared:test-support')
+    )
+    authorServiceContractTestCompile(
+            'junit:junit:4.12',
+            'org.hamcrest:java-hamcrest:2.0.0.0',
+            'com.amazonaws:amazon-kinesis-client:1.9.0',
+            'com.jayway.jsonpath:json-path:2.3.0',
+            'com.jayway.jsonpath:json-path-assert:2.2.0',
+            project(':test:support'),
+            project(':test:support:golden-data'),
+            project('fake-authors-service')
+    )
+
+    integrationTestCompile(
+            'junit:junit:4.12',
+            'org.hamcrest:java-hamcrest:2.0.0.0',
+            project(':test:support'),
+            project('fake-authors-service')
+    )
+
+}
+
+task authorServiceContractTest(type: Test) {
+    ext.interServiceContractTest = true
+    description = 'Runs the author service contract tests.'
+    group = 'verification'
+    testClassesDir = sourceSets.authorServiceContractTest.output.classesDir
+    classpath = sourceSets.authorServiceContractTest.runtimeClasspath
+    shouldRunAfter 'test'
+
+    if (project.hasProperty('contractTestRealService') && project.contractTestRealService) {
+        environment 'AUTHOR_SERVICE_CONTRACT_TEST_REAL_TARGET', 'true'
+    }
+}
+
+task integrationTest(type: Test) {
+    description = 'Runs the integration tests.'
+    group = 'verification'
+    testClassesDir = sourceSets.integrationTest.output.classesDir
+    classpath = sourceSets.integrationTest.runtimeClasspath
+    shouldRunAfter 'test', 'authorServiceContractTest'
+}

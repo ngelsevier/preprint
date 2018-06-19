@@ -1,0 +1,9 @@
+version: '2.1'
+services:
+  service:
+    build: .
+    networks:
+      default:
+        aliases:
+          - papers-database.internal-service
+          - authors-database.internal-service

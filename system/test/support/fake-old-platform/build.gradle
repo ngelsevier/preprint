@@ -1,0 +1,22 @@
+apply plugin: 'java'
+
+ext {
+    portable_classpath = true
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile(
+            "io.dropwizard:dropwizard-core:${dropwizardVersion}",
+            "io.dropwizard:dropwizard-views-mustache:${dropwizardVersion}",
+            "io.dropwizard:dropwizard-auth:${dropwizardVersion}",
+            "io.dropwizard:dropwizard-assets:${dropwizardVersion}",
+            'commons-collections:commons-collections:3.2.2',
+            project(':test:support:http'),
+            project(':test:support:golden-data'),
+            project(':test:support')
+    )
+}

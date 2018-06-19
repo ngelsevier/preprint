@@ -1,0 +1,16 @@
+filebeat:
+  prospectors:
+    -
+      paths:
+        - /var/log/updates-publisher/updates-publisher.log
+      input_type: log
+      multiline:
+        pattern: '^(TRACE|DEBUG|INFO|WARN|ERROR)[[:space:]]+\['
+        negate: true
+        match: after
+      fields:
+        service: authors-updates-publisher
+        version: ${VERSION}
+output:
+  logstash:
+    hosts: ["logstash.internal-service:80"]

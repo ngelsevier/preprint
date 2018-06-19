@@ -1,0 +1,69 @@
+apply plugin: 'java'
+
+ext {
+    serviceRoot = true
+}
+
+repositories {
+    mavenCentral()
+}
+
+sourceSets {
+    serviceTest {
+        java {
+            srcDirs = files('src/service-test/java')
+        }
+
+        resources.srcDirs = files('src/service-test/resources')
+    }
+
+    searchServiceContractTest {
+        java {
+            srcDirs = files('../frontend/website/src/search-service-contract-test/java')
+        }
+
+        resources.srcDirs = files('../frontend/website/src/search-service-contract-test/resources')
+    }
+}
+
+dependencies {
+    serviceTestCompile(
+            'junit:junit:4.12',
+            'org.hamcrest:java-hamcrest:2.0.0.0',
+            'org.glassfish.jersey.core:jersey-client:2.25.1',
+            'com.jayway.jsonpath:json-path:2.3.0',
+            'com.jayway.jsonpath:json-path-assert:2.2.0',
+            project(':test:support'),
+            project('papers-consumer:fake-papers-service'),
+            project('author-updates-subscriber:fake-authors-service')
+    )
+
+    searchServiceContractTestCompile(
+            'junit:junit:4.12',
+            'org.hamcrest:java-hamcrest:2.0.0.0',
+            'com.jayway.jsonpath:json-path-assert:2.2.0',
+            "io.dropwizard:dropwizard-testing:${dropwizardVersion}",
+            project(':test:support'),
+            project(':test:support:golden-data'),
+            project(':services:frontend:website:fake-search-service')
+    )
+}
+
+task serviceTest(type: Test) {
+    description = 'Runs the service tests.'
+    group = 'verification'
+    testClassesDir = sourceSets.serviceTest.output.classesDir
+    classpath = sourceSets.serviceTest.runtimeClasspath
+    shouldRunAfter subprojects.collect { it.tasks.withType(Test) }
+}
+
+task systemLevelInterServiceContractTest(type: Test) {
+    ext.interServiceContractTest = true
+    description = 'Runs the search service contract tests.'
+    group = 'verification'
+    testClassesDir = sourceSets.searchServiceContractTest.output.classesDir
+    classpath = sourceSets.searchServiceContractTest.runtimeClasspath
+    shouldRunAfter 'test'
+
+    environment 'SEARCH_SERVICE_BASE_URL', 'http://search.internal-service'
+}

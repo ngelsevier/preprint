@@ -1,0 +1,48 @@
+version: '2.1'
+services:
+  fake-cdn:
+    extends:
+      file: ../../test/support/fake-cdn/docker-compose.yml
+      service: service
+    ports:
+      - "80:80"
+      - "81:81"
+  fake-load-balancer:
+    extends:
+      file: ../../test/support/fake-load-balancer/docker-compose.yml
+      service: service
+  postgres:
+    extends:
+      file: ../../test/support/postgres/docker-compose.yml
+      service: service
+    ports:
+      - "5432:5432"
+  papers-emitter:
+    extends:
+      file: emitter/docker-compose-${PAPERS_DOCKER_COMPOSE_SERVICE_MODE:-build}.yml
+      service: service
+    environment:
+      - MAX_CONCURRENT_EMISSIONS=4
+      - SHIP_LOGS=false
+      - LOG_INDIVIDUAL_PAPERS=true
+      - KINESIS_STREAM_NAME=papers
+  kinesis:
+    extends:
+      file: ../../test/support/fake-kinesis/docker-compose.yml
+      service: service
+    ports:
+      - "4567:4567"
+      - "8000:8000"
+  papers-replicator:
+    extends:
+      file: replicator/docker-compose-${PAPERS_DOCKER_COMPOSE_SERVICE_MODE:-build}.yml
+      service: service
+    environment:
+      - EVENTS_FEED_BASE_URL=http://fake-old-platform
+      - EVENTS_FEED_HTTP_BASIC_AUTH_USERNAME=username
+      - EVENTS_FEED_HTTP_BASIC_AUTH_PASSWORD=password
+      - SHIP_LOGS=false
+  fake-old-platform:
+    extends:
+      file: ../../test/support/fake-old-platform/docker-compose.yml
+      service: service

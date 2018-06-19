@@ -1,0 +1,17 @@
+version: '2.1'
+services:
+  service:
+    build: .
+    volumes:
+      - ./nginx:/etc/nginx/
+    networks:
+      default:
+        aliases:
+          - authors-replicator.internal-service
+          - frontend-website.internal-service
+          - papers-replicator.internal-service
+          - search.internal-service
+          - fake-authors.internal-service
+          - fake-logging-client.internal-service
+          - fake-papers.internal-service
+          - fake-search.internal-service

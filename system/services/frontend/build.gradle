@@ -1,0 +1,38 @@
+apply plugin: 'java'
+
+ext {
+    serviceRoot = true
+}
+
+repositories {
+    mavenCentral()
+}
+
+sourceSets {
+    serviceTest {
+        java {
+            srcDirs = files('src/service-test/java')
+        }
+
+        resources.srcDirs = files('src/service-test/resources')
+    }
+}
+
+dependencies {
+    serviceTestCompile(
+            'junit:junit:4.12',
+            'org.hamcrest:java-hamcrest:2.0.0.0',
+            'org.seleniumhq.selenium:selenium-htmlunit-driver:2.52.0',
+            project(':test:support'),
+            project(':test:support:fake-old-platform'),
+            project('website:fake-search-service'),
+    )
+}
+
+task serviceTest(type: Test) {
+    description = 'Runs the service tests.'
+    group = 'verification'
+    testClassesDir = sourceSets.serviceTest.output.classesDir
+    classpath = sourceSets.serviceTest.runtimeClasspath
+    shouldRunAfter subprojects.collect { it.tasks.withType(Test) }
+}

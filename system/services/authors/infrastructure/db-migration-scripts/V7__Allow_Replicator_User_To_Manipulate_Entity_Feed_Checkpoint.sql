@@ -1,0 +1,1 @@
+GRANT INSERT, UPDATE, SELECT ON job_checkpoint TO replicator;

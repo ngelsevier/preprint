@@ -1,0 +1,71 @@
+apply plugin: 'java'
+
+ext {
+    serviceRoot = true
+}
+
+repositories {
+    mavenCentral()
+}
+
+sourceSets {
+    serviceTest {
+        java {
+            srcDirs = files('src/service-test/java')
+        }
+
+        resources.srcDirs = files('src/service-test/resources')
+    }
+
+    paperServiceContractTest {
+        java {
+            srcDirs = files('../search/papers-consumer/src/paper-service-contract-test/java')
+        }
+
+        resources.srcDirs = files('../search/papers-consumer/src/paper-service-contract-test/resources')
+    }
+}
+
+dependencies {
+    serviceTestCompile(
+            'junit:junit:4.12',
+            'org.hamcrest:java-hamcrest:2.0.0.0',
+            'com.amazonaws:amazon-kinesis-client:1.9.0',
+            'com.jayway.jsonpath:json-path:2.3.0',
+            'com.jayway.jsonpath:json-path-assert:2.2.0',
+            'org.postgresql:postgresql:42.2.2',
+            'org.json:json:20180130',
+            project(':test:support'),
+            project(':test:support:fake-old-platform'),
+            project('shared:test-support')
+    )
+    paperServiceContractTestCompile(
+            'junit:junit:4.12',
+            'org.hamcrest:java-hamcrest:2.0.0.0',
+            'com.amazonaws:amazon-kinesis-client:1.9.0',
+            'com.jayway.jsonpath:json-path:2.3.0',
+            'com.jayway.jsonpath:json-path-assert:2.2.0',
+            project(':test:support'),
+            project(':test:support:golden-data'),
+            project(':services:search:papers-consumer:fake-papers-service')
+    )
+}
+
+task serviceTest(type: Test) {
+    description = 'Runs the service tests.'
+    group = 'verification'
+    testClassesDir = sourceSets.serviceTest.output.classesDir
+    classpath = sourceSets.serviceTest.runtimeClasspath
+    shouldRunAfter subprojects.collect { it.tasks.withType(Test) }
+}
+
+task systemLevelInterServiceContractTest (type: Test) {
+    ext.interServiceContractTest = true
+    description = 'Runs the paper service contract tests.'
+    group = 'verification'
+    testClassesDir = sourceSets.paperServiceContractTest.output.classesDir
+    classpath = sourceSets.paperServiceContractTest.runtimeClasspath
+    shouldRunAfter 'test'
+
+    environment 'PAPER_SERVICE_CONTRACT_TEST_REAL_TARGET', 'true'
+}

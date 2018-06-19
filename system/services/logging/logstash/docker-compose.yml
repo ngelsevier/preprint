@@ -1,0 +1,11 @@
+version: '2.1'
+services:
+  service:
+    environment:
+      - AWS_ACCESS_KEY_ID=dummy
+      - AWS_SECRET_ACCESS_KEY=dummy
+      - LS_JAVA_OPTS=-Xms256m -Xmx512m
+    networks:
+      default:
+        aliases:
+          - logstash-instance

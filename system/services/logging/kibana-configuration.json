@@ -1,0 +1,714 @@
+[
+  {
+    "_id": "d5a6bde0-f9de-11e7-9ab1-4d03baea3d8c",
+    "_type": "dashboard",
+    "_source": {
+      "title": "Global",
+      "hits": 0,
+      "description": "",
+      "panelsJSON": "[{\"size_x\":12,\"size_y\":7,\"panelIndex\":1,\"type\":\"visualization\",\"id\":\"ce598220-f1fa-11e7-b2bb-ed2756f82fbd\",\"col\":1,\"row\":1}]",
+      "optionsJSON": "{\"darkTheme\":false}",
+      "uiStateJSON": "{}",
+      "version": 1,
+      "timeRestore": false,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"highlightAll\":true,\"filter\":[{\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}}}]}"
+      }
+    }
+  },
+  {
+    "_id": "e9cbc280-26d3-11e8-b30c-cd539722ed15",
+    "_type": "dashboard",
+    "_source": {
+      "title": "Authors Service",
+      "hits": 0,
+      "description": "",
+      "panelsJSON": "[{\"size_x\":6,\"size_y\":3,\"panelIndex\":1,\"type\":\"visualization\",\"id\":\"5d6b2ce0-26d3-11e8-b30c-cd539722ed15\",\"col\":1,\"row\":1},{\"size_x\":6,\"size_y\":3,\"panelIndex\":2,\"type\":\"visualization\",\"id\":\"81f7dd60-26d3-11e8-b30c-cd539722ed15\",\"col\":7,\"row\":1},{\"size_x\":6,\"size_y\":3,\"panelIndex\":3,\"type\":\"visualization\",\"id\":\"bdf84d10-f9db-11e7-8ba9-73177d0612bd\",\"col\":1,\"row\":4},{\"size_x\":6,\"size_y\":3,\"panelIndex\":4,\"type\":\"visualization\",\"id\":\"06635030-f9dd-11e7-9ab1-4d03baea3d8c\",\"col\":7,\"row\":4}]",
+      "optionsJSON": "{\"darkTheme\":false}",
+      "uiStateJSON": "{}",
+      "version": 1,
+      "timeRestore": false,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"highlightAll\":true,\"filter\":[{\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}}}]}"
+      }
+    }
+  },
+  {
+    "_id": "f4a9e510-26d3-11e8-b30c-cd539722ed15",
+    "_type": "dashboard",
+    "_source": {
+      "title": "Papers Service",
+      "hits": 0,
+      "description": "",
+      "panelsJSON": "[{\"size_x\":6,\"size_y\":3,\"panelIndex\":1,\"type\":\"visualization\",\"id\":\"9adaddf0-26d3-11e8-b30c-cd539722ed15\",\"col\":1,\"row\":1},{\"size_x\":6,\"size_y\":3,\"panelIndex\":2,\"type\":\"visualization\",\"id\":\"b909eaf0-26d3-11e8-b30c-cd539722ed15\",\"col\":7,\"row\":1},{\"size_x\":6,\"size_y\":3,\"panelIndex\":3,\"type\":\"visualization\",\"id\":\"e7de75b0-c942-11e7-88a2-4bc0e3021f6b\",\"col\":1,\"row\":4},{\"size_x\":6,\"size_y\":3,\"panelIndex\":4,\"type\":\"visualization\",\"id\":\"fa8823a0-c942-11e7-88a2-4bc0e3021f6b\",\"col\":7,\"row\":4}]",
+      "optionsJSON": "{\"darkTheme\":false}",
+      "uiStateJSON": "{}",
+      "version": 1,
+      "timeRestore": false,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"highlightAll\":true,\"filter\":[{\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}}}]}"
+      }
+    }
+  },
+  {
+    "_id": "4aa9c0c0-fd1c-11e7-b74b-d99062d26d7b",
+    "_type": "dashboard",
+    "_source": {
+      "title": "Entity and Event Feed Performance",
+      "hits": 0,
+      "description": "",
+      "panelsJSON": "[{\"size_x\":6,\"size_y\":3,\"panelIndex\":1,\"type\":\"visualization\",\"id\":\"5d6b2ce0-26d3-11e8-b30c-cd539722ed15\",\"col\":1,\"row\":1},{\"size_x\":6,\"size_y\":3,\"panelIndex\":2,\"type\":\"visualization\",\"id\":\"81f7dd60-26d3-11e8-b30c-cd539722ed15\",\"col\":7,\"row\":1},{\"size_x\":6,\"size_y\":3,\"panelIndex\":3,\"type\":\"visualization\",\"id\":\"9adaddf0-26d3-11e8-b30c-cd539722ed15\",\"col\":1,\"row\":4},{\"size_x\":6,\"size_y\":3,\"panelIndex\":4,\"type\":\"visualization\",\"id\":\"b909eaf0-26d3-11e8-b30c-cd539722ed15\",\"col\":7,\"row\":4}]",
+      "optionsJSON": "{\"darkTheme\":false}",
+      "uiStateJSON": "{}",
+      "version": 1,
+      "timeRestore": false,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"highlightAll\":true,\"filter\":[{\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}}}]}"
+      }
+    }
+  },
+  {
+    "_id": "c07303e0-c21e-11e7-ae4b-073aaeb494fb",
+    "_type": "search",
+    "_source": {
+      "title": "[Service] [Search] [Papers Consumer]",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "level",
+        "log_message"
+      ],
+      "sort": [
+        "@timestamp",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"logstash-*\",\"highlightAll\":true,\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}},\"filter\":[{\"$state\":{\"store\":\"appState\"},\"meta\":{\"alias\":\"Search Papers Consumer\",\"disabled\":false,\"index\":\"logstash-*\",\"key\":\"query\",\"negate\":false,\"value\":\"{\\\"bool\\\":{\\\"filter\\\":{\\\"term\\\":{\\\"service.keyword\\\":\\\"search-papers-consumer\\\"}}}}\"},\"query\":{\"bool\":{\"filter\":{\"term\":{\"service.keyword\":\"search-papers-consumer\"}}}}}]}"
+      }
+    }
+  },
+  {
+    "_id": "98adbda0-c21e-11e7-ae4b-073aaeb494fb",
+    "_type": "search",
+    "_source": {
+      "title": "[Service] [Papers] [Emitter]",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "level",
+        "log_message"
+      ],
+      "sort": [
+        "@timestamp",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"logstash-*\",\"highlightAll\":true,\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}},\"filter\":[{\"$state\":{\"store\":\"appState\"},\"meta\":{\"alias\":\"Papers Emitter\",\"disabled\":false,\"index\":\"logstash-*\",\"key\":\"query\",\"negate\":false,\"value\":\"{\\\"bool\\\":{\\\"filter\\\":{\\\"term\\\":{\\\"service.keyword\\\":\\\"papers-emitter\\\"}}}}\"},\"query\":{\"bool\":{\"filter\":{\"term\":{\"service.keyword\":\"papers-emitter\"}}}}}]}"
+      }
+    }
+  },
+  {
+    "_id": "26e9f870-c21c-11e7-ae4b-073aaeb494fb",
+    "_type": "search",
+    "_source": {
+      "title": "[Global] Errors",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "service",
+        "error_message",
+        "exception",
+        "exception_message"
+      ],
+      "sort": [
+        "@timestamp",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"logstash-*\",\"highlightAll\":true,\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}},\"filter\":[{\"meta\":{\"negate\":false,\"index\":\"logstash-*\",\"key\":\"query\",\"value\":\"{\\\"bool\\\":{\\\"filter\\\":{\\\"term\\\":{\\\"level.keyword\\\":\\\"ERROR\\\"}}}}\",\"disabled\":false,\"alias\":\"Errors\"},\"query\":{\"bool\":{\"filter\":{\"term\":{\"level.keyword\":\"ERROR\"}}}},\"$state\":{\"store\":\"appState\"}}]}"
+      }
+    }
+  },
+  {
+    "_id": "6d70e2a0-b311-11e7-9864-7940e84417fa",
+    "_type": "search",
+    "_source": {
+      "title": "[Service] [Papers] [Replicator] Inbound Requests",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "service",
+        "inbound_request_http_method",
+        "inbound_request_request_path",
+        "inbound_request_response_code"
+      ],
+      "sort": [
+        "@timestamp",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"logstash-*\",\"highlightAll\":true,\"filter\":[{\"$state\":{\"store\":\"appState\"},\"meta\":{\"alias\":\"Inbound Request\",\"disabled\":false,\"index\":\"logstash-*\",\"key\":\"query\",\"negate\":false,\"value\":\"{\\\"bool\\\":{\\\"filter\\\":{\\\"term\\\":{\\\"type.keyword\\\":\\\"inbound-request\\\"}}}}\"},\"query\":{\"bool\":{\"filter\":{\"term\":{\"type.keyword\":\"inbound-request\"}}}}},{\"$state\":{\"store\":\"appState\"},\"meta\":{\"alias\":\"Load Balancer Healthchecks\",\"disabled\":false,\"index\":\"logstash-*\",\"key\":\"query\",\"negate\":true,\"value\":\"{\\\"bool\\\":{\\\"filter\\\":{\\\"term\\\":{\\\"inbound_request_http_user_agent.keyword\\\":\\\"\\\\\\\"ELB-HealthChecker/2.0\\\\\\\"\\\"}}}}\"},\"query\":{\"bool\":{\"filter\":{\"term\":{\"inbound_request_http_user_agent.keyword\":\"\\\"ELB-HealthChecker/2.0\\\"\"}}}}},{\"meta\":{\"negate\":false,\"index\":\"logstash-*\",\"key\":\"query\",\"value\":\"{\\\"bool\\\":{\\\"filter\\\":{\\\"term\\\":{\\\"service.keyword\\\":\\\"papers-replicator\\\"}}}}\",\"disabled\":false,\"alias\":\"Papers Replicator\"},\"query\":{\"bool\":{\"filter\":{\"term\":{\"service.keyword\":\"papers-replicator\"}}}},\"$state\":{\"store\":\"appState\"}}],\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}}}"
+      }
+    }
+  },
+  {
+    "_id": "e097a4e0-bfe5-11e7-a4ec-bb498e034cd4",
+    "_type": "search",
+    "_source": {
+      "title": "[Service] [Papers] [Replicator] Entity Feed Cycles",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "@timestamp",
+        "type",
+        "outbound_request_url",
+        "_type"
+      ],
+      "sort": [
+        "@timestamp",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"logstash-*\",\"highlightAll\":true,\"filter\":[{\"$state\":{\"store\":\"appState\"},\"meta\":{\"alias\":\"Papers Replicator\",\"disabled\":false,\"index\":\"logstash-*\",\"key\":\"query\",\"negate\":false,\"value\":\"{\\\"bool\\\":{\\\"filter\\\":{\\\"term\\\":{\\\"service.keyword\\\":\\\"papers-replicator\\\"}}}}\"},\"query\":{\"bool\":{\"filter\":{\"term\":{\"service.keyword\":\"papers-replicator\"}}}}},{\"$state\":{\"store\":\"appState\"},\"meta\":{\"alias\":\"Request https://privhq.ssrn.com/rest/entities/papers\",\"disabled\":false,\"index\":\"logstash-*\",\"key\":\"query\",\"negate\":false,\"value\":\"{\\\"bool\\\":{\\\"filter\\\":{\\\"bool\\\":{\\\"must\\\":[{\\\"term\\\":{\\\"type.keyword\\\":\\\"outbound-request\\\"}},{\\\"term\\\":{\\\"outbound_request_url.keyword\\\":\\\"https://privhq.ssrn.com/rest/entities/papers\\\"}}]}}}}\"},\"query\":{\"bool\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"type.keyword\":\"outbound-request\"}},{\"term\":{\"outbound_request_url.keyword\":\"https://privhq.ssrn.com/rest/entities/papers\"}}]}}}}}],\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}}}"
+      }
+    }
+  },
+  {
+    "_id": "26d55900-a2a1-11e7-a3c2-7524a6b697b9",
+    "_type": "search",
+    "_source": {
+      "title": "[Global]",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "service",
+        "type",
+        "level"
+      ],
+      "sort": [
+        "@timestamp",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"logstash-*\",\"highlightAll\":true,\"filter\":[],\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}}}"
+      }
+    }
+  },
+  {
+    "_id": "413ddaa0-b314-11e7-9864-7940e84417fa",
+    "_type": "search",
+    "_source": {
+      "title": "[Global] Inbound Requests",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "service",
+        "inbound_request_http_method",
+        "inbound_request_request_path",
+        "inbound_request_response_code"
+      ],
+      "sort": [
+        "@timestamp",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"logstash-*\",\"highlightAll\":true,\"filter\":[{\"$state\":{\"store\":\"appState\"},\"meta\":{\"alias\":\"Inbound Requests\",\"disabled\":false,\"index\":\"logstash-*\",\"key\":\"query\",\"negate\":false,\"value\":\"{\\\"bool\\\":{\\\"filter\\\":{\\\"term\\\":{\\\"type.keyword\\\":\\\"inbound-request\\\"}}}}\"},\"query\":{\"bool\":{\"filter\":{\"term\":{\"type.keyword\":\"inbound-request\"}}}}},{\"$state\":{\"store\":\"appState\"},\"meta\":{\"alias\":\"Load Balancer Healthchecks\",\"disabled\":false,\"index\":\"logstash-*\",\"key\":\"inbound_request_http_user_agent\",\"negate\":true,\"value\":\"\\\"ELB-HealthChecker/2.0\\\"\"},\"query\":{\"match\":{\"inbound_request_http_user_agent\":{\"query\":\"\\\"ELB-HealthChecker/2.0\\\"\",\"type\":\"phrase\"}}}}],\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}}}"
+      }
+    }
+  },
+  {
+    "_id": "cc769b00-c21b-11e7-ae4b-073aaeb494fb",
+    "_type": "search",
+    "_source": {
+      "title": "[Global] Warnings",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "service",
+        "log_message"
+      ],
+      "sort": [
+        "@timestamp",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"logstash-*\",\"highlightAll\":true,\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}},\"filter\":[{\"meta\":{\"negate\":false,\"index\":\"logstash-*\",\"key\":\"query\",\"value\":\"{\\\"bool\\\":{\\\"filter\\\":{\\\"term\\\":{\\\"level.keyword\\\":\\\"WARN\\\"}}}}\",\"disabled\":false,\"alias\":\"Warnings\"},\"query\":{\"bool\":{\"filter\":{\"term\":{\"level.keyword\":\"WARN\"}}}},\"$state\":{\"store\":\"appState\"}}]}"
+      }
+    }
+  },
+  {
+    "_id": "000dbf70-c3d9-11e7-a772-0b9b84e3d9b9",
+    "_type": "search",
+    "_source": {
+      "title": "[Service] [Papers] [Replicator] Entity Feed Outbound Requests",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "@timestamp",
+        "type",
+        "outbound_request_method",
+        "outbound_request_url",
+        "outbound_request_response_code"
+      ],
+      "sort": [
+        "@timestamp",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"logstash-*\",\"highlightAll\":true,\"filter\":[{\"$state\":{\"store\":\"appState\"},\"meta\":{\"alias\":\"Papers Replicator\",\"disabled\":false,\"index\":\"logstash-*\",\"key\":\"query\",\"negate\":false,\"value\":\"{\\\"bool\\\":{\\\"filter\\\":{\\\"term\\\":{\\\"service.keyword\\\":\\\"papers-replicator\\\"}}}}\"},\"query\":{\"bool\":{\"filter\":{\"term\":{\"service.keyword\":\"papers-replicator\"}}}}},{\"$state\":{\"store\":\"appState\"},\"meta\":{\"alias\":\"Outbound Requests & Responses\",\"disabled\":false,\"index\":\"logstash-*\",\"key\":\"query\",\"negate\":false,\"value\":\"{\\\"bool\\\":{\\\"filter\\\":{\\\"bool\\\":{\\\"should\\\":[{\\\"term\\\":{\\\"type.keyword\\\":\\\"outbound-request\\\"}},{\\\"term\\\":{\\\"type.keyword\\\":\\\"outbound-request-response\\\"}}]}}}}\"},\"query\":{\"bool\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"type.keyword\":\"outbound-request\"}},{\"term\":{\"type.keyword\":\"outbound-request-response\"}}]}}}}},{\"meta\":{\"negate\":false,\"index\":\"logstash-*\",\"key\":\"query\",\"value\":\"{\\\"bool\\\":{\\\"filter\\\":{\\\"term\\\":{\\\"logger.keyword\\\":\\\"com.ssrn.papers.replicator.http_old_platform_paper_entities_feed.PageSource\\\"}}}}\",\"disabled\":false,\"alias\":\"Entity Feed Logger\"},\"query\":{\"bool\":{\"filter\":{\"term\":{\"logger.keyword\":\"com.ssrn.papers.replicator.http_old_platform_paper_entities_feed.PageSource\"}}}},\"$state\":{\"store\":\"appState\"}}],\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}}}"
+      }
+    }
+  },
+  {
+    "_id": "3c28c8d0-c21f-11e7-ae4b-073aaeb494fb",
+    "_type": "search",
+    "_source": {
+      "title": "[Service] [Frontend] [Website]",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "level",
+        "log_message"
+      ],
+      "sort": [
+        "@timestamp",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"logstash-*\",\"highlightAll\":true,\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"filter\":[{\"$state\":{\"store\":\"appState\"},\"meta\":{\"alias\":\"Frontend Website\",\"disabled\":false,\"index\":\"logstash-*\",\"key\":\"query\",\"negate\":false,\"value\":\"{\\\"bool\\\":{\\\"filter\\\":{\\\"term\\\":{\\\"service.keyword\\\":\\\"frontend-website\\\"}}}}\"},\"query\":{\"bool\":{\"filter\":{\"term\":{\"service.keyword\":\"frontend-website\"}}}}},{\"meta\":{\"negate\":true,\"index\":\"logstash-*\",\"key\":\"query\",\"value\":\"{\\\"bool\\\":{\\\"filter\\\":{\\\"term\\\":{\\\"inbound_request_http_user_agent.keyword\\\":\\\"\\\\\\\"ELB-HealthChecker/2.0\\\\\\\"\\\"}}}}\",\"disabled\":false,\"alias\":\"Load Balancer Healthchecks\"},\"query\":{\"bool\":{\"filter\":{\"term\":{\"inbound_request_http_user_agent.keyword\":\"\\\"ELB-HealthChecker/2.0\\\"\"}}}},\"$state\":{\"store\":\"appState\"}}]}"
+      }
+    }
+  },
+  {
+    "_id": "da7b3be0-add8-11e7-9478-cb77336a06be",
+    "_type": "search",
+    "_source": {
+      "title": "[Service] [Papers] [Replicator]",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "level",
+        "log_message"
+      ],
+      "sort": [
+        "@timestamp",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"logstash-*\",\"highlightAll\":true,\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"filter\":[{\"$state\":{\"store\":\"appState\"},\"meta\":{\"alias\":\"Papers Replicator\",\"disabled\":false,\"index\":\"logstash-*\",\"key\":\"query\",\"negate\":false,\"value\":\"{\\\"bool\\\":{\\\"filter\\\":{\\\"term\\\":{\\\"service.keyword\\\":\\\"papers-replicator\\\"}}}}\"},\"query\":{\"bool\":{\"filter\":{\"term\":{\"service.keyword\":\"papers-replicator\"}}}}},{\"meta\":{\"negate\":true,\"index\":\"logstash-*\",\"key\":\"query\",\"value\":\"{\\\"bool\\\":{\\\"filter\\\":{\\\"term\\\":{\\\"inbound_request_http_user_agent.keyword\\\":\\\"\\\\\\\"ELB-HealthChecker/2.0\\\\\\\"\\\"}}}}\",\"disabled\":false,\"alias\":\"Load Balancer Healthchecks\"},\"query\":{\"bool\":{\"filter\":{\"term\":{\"inbound_request_http_user_agent.keyword\":\"\\\"ELB-HealthChecker/2.0\\\"\"}}}},\"$state\":{\"store\":\"appState\"}}]}"
+      }
+    }
+  },
+  {
+    "_id": "fe45e390-c21e-11e7-ae4b-073aaeb494fb",
+    "_type": "search",
+    "_source": {
+      "title": "[Service] [Search] [API]",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "level",
+        "log_message"
+      ],
+      "sort": [
+        "@timestamp",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"logstash-*\",\"highlightAll\":true,\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}},\"filter\":[{\"$state\":{\"store\":\"appState\"},\"meta\":{\"alias\":\"Search API\",\"disabled\":false,\"index\":\"logstash-*\",\"key\":\"query\",\"negate\":false,\"value\":\"{\\\"bool\\\":{\\\"filter\\\":{\\\"term\\\":{\\\"service.keyword\\\":\\\"search-api\\\"}}}}\"},\"query\":{\"bool\":{\"filter\":{\"term\":{\"service.keyword\":\"search-api\"}}}}},{\"meta\":{\"negate\":true,\"index\":\"logstash-*\",\"key\":\"query\",\"value\":\"{\\\"bool\\\":{\\\"filter\\\":{\\\"term\\\":{\\\"inbound_request_http_user_agent.keyword\\\":\\\"\\\\\\\"ELB-HealthChecker/2.0\\\\\\\"\\\"}}}}\",\"disabled\":false,\"alias\":\"Load Balancer Healthchecks\"},\"query\":{\"bool\":{\"filter\":{\"term\":{\"inbound_request_http_user_agent.keyword\":\"\\\"ELB-HealthChecker/2.0\\\"\"}}}},\"$state\":{\"store\":\"appState\"}}]}"
+      }
+    }
+  },
+  {
+    "_id": "a75e0230-c942-11e7-88a2-4bc0e3021f6b",
+    "_type": "search",
+    "_source": {
+      "title": "[Service] [Papers] [Replicator] Inbound Entity Replication Requests",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "service",
+        "inbound_request_http_method",
+        "inbound_request_request_path",
+        "inbound_request_response_code"
+      ],
+      "sort": [
+        "@timestamp",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"logstash-*\",\"highlightAll\":true,\"filter\":[{\"$state\":{\"store\":\"appState\"},\"meta\":{\"alias\":\"Inbound Request\",\"disabled\":false,\"index\":\"logstash-*\",\"key\":\"query\",\"negate\":false,\"value\":\"{\\\"bool\\\":{\\\"filter\\\":{\\\"term\\\":{\\\"type.keyword\\\":\\\"inbound-request\\\"}}}}\"},\"query\":{\"bool\":{\"filter\":{\"term\":{\"type.keyword\":\"inbound-request\"}}}}},{\"$state\":{\"store\":\"appState\"},\"meta\":{\"alias\":\"Load Balancer Healthchecks\",\"disabled\":false,\"index\":\"logstash-*\",\"key\":\"query\",\"negate\":true,\"value\":\"{\\\"bool\\\":{\\\"filter\\\":{\\\"term\\\":{\\\"inbound_request_http_user_agent.keyword\\\":\\\"\\\\\\\"ELB-HealthChecker/2.0\\\\\\\"\\\"}}}}\"},\"query\":{\"bool\":{\"filter\":{\"term\":{\"inbound_request_http_user_agent.keyword\":\"\\\"ELB-HealthChecker/2.0\\\"\"}}}}},{\"$state\":{\"store\":\"appState\"},\"meta\":{\"alias\":\"Papers Replicator\",\"disabled\":false,\"index\":\"logstash-*\",\"key\":\"query\",\"negate\":false,\"value\":\"{\\\"bool\\\":{\\\"filter\\\":{\\\"term\\\":{\\\"service.keyword\\\":\\\"papers-replicator\\\"}}}}\"},\"query\":{\"bool\":{\"filter\":{\"term\":{\"service.keyword\":\"papers-replicator\"}}}}},{\"meta\":{\"negate\":false,\"index\":\"logstash-*\",\"key\":\"inbound_request_request_path\",\"value\":\"/jobs/entity-replication\",\"disabled\":false,\"alias\":null},\"query\":{\"match\":{\"inbound_request_request_path\":{\"query\":\"/jobs/entity-replication\",\"type\":\"phrase\"}}},\"$state\":{\"store\":\"appState\"}}],\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}}}"
+      }
+    }
+  },
+  {
+    "_id": "9cc6fac0-c942-11e7-88a2-4bc0e3021f6b",
+    "_type": "search",
+    "_source": {
+      "title": "[Service] [Papers] [Replicator] Inbound Event Replication Requests",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "service",
+        "inbound_request_http_method",
+        "inbound_request_request_path",
+        "inbound_request_response_code"
+      ],
+      "sort": [
+        "@timestamp",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"logstash-*\",\"highlightAll\":true,\"filter\":[{\"$state\":{\"store\":\"appState\"},\"meta\":{\"alias\":\"Inbound Request\",\"disabled\":false,\"index\":\"logstash-*\",\"key\":\"query\",\"negate\":false,\"value\":\"{\\\"bool\\\":{\\\"filter\\\":{\\\"term\\\":{\\\"type.keyword\\\":\\\"inbound-request\\\"}}}}\"},\"query\":{\"bool\":{\"filter\":{\"term\":{\"type.keyword\":\"inbound-request\"}}}}},{\"$state\":{\"store\":\"appState\"},\"meta\":{\"alias\":\"Load Balancer Healthchecks\",\"disabled\":false,\"index\":\"logstash-*\",\"key\":\"query\",\"negate\":true,\"value\":\"{\\\"bool\\\":{\\\"filter\\\":{\\\"term\\\":{\\\"inbound_request_http_user_agent.keyword\\\":\\\"\\\\\\\"ELB-HealthChecker/2.0\\\\\\\"\\\"}}}}\"},\"query\":{\"bool\":{\"filter\":{\"term\":{\"inbound_request_http_user_agent.keyword\":\"\\\"ELB-HealthChecker/2.0\\\"\"}}}}},{\"$state\":{\"store\":\"appState\"},\"meta\":{\"alias\":\"Papers Replicator\",\"disabled\":false,\"index\":\"logstash-*\",\"key\":\"query\",\"negate\":false,\"value\":\"{\\\"bool\\\":{\\\"filter\\\":{\\\"term\\\":{\\\"service.keyword\\\":\\\"papers-replicator\\\"}}}}\"},\"query\":{\"bool\":{\"filter\":{\"term\":{\"service.keyword\":\"papers-replicator\"}}}}},{\"$state\":{\"store\":\"appState\"},\"meta\":{\"alias\":null,\"disabled\":false,\"index\":\"logstash-*\",\"key\":\"inbound_request_request_path\",\"negate\":false,\"value\":\"/jobs/event-replication\"},\"query\":{\"match\":{\"inbound_request_request_path\":{\"query\":\"/jobs/event-replication\",\"type\":\"phrase\"}}}}],\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}}}"
+      }
+    }
+  },
+  {
+    "_id": "c6762b80-ebc4-11e7-ae9e-f91228389df0",
+    "_type": "search",
+    "_source": {
+      "title": "[Service] [Authors] [Updates Publisher]",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "level",
+        "log_message"
+      ],
+      "sort": [
+        "@timestamp",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"logstash-*\",\"highlightAll\":true,\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}},\"filter\":[{\"$state\":{\"store\":\"appState\"},\"meta\":{\"alias\":\"Authors Updates Publisher\",\"disabled\":false,\"index\":\"logstash-*\",\"key\":\"query\",\"negate\":false,\"value\":\"{\\\"bool\\\":{\\\"filter\\\":{\\\"term\\\":{\\\"service.keyword\\\":\\\"authors-updates-publisher\\\"}}}}\"},\"query\":{\"bool\":{\"filter\":{\"term\":{\"service.keyword\":\"authors-updates-publisher\"}}}}}]}"
+      }
+    }
+  },
+  {
+    "_id": "c5cd9310-e3fb-11e7-bd4e-dfb3fb4b03eb",
+    "_type": "search",
+    "_source": {
+      "title": "[Service] [Authors] [Replicator] Entity Feed Cyles",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "level",
+        "service",
+        "outbound_request_url"
+      ],
+      "sort": [
+        "@timestamp",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"logstash-*\",\"highlightAll\":true,\"filter\":[{\"meta\":{\"negate\":false,\"index\":\"logstash-*\",\"key\":\"query\",\"value\":\"{\\\"bool\\\":{\\\"filter\\\":{\\\"bool\\\":{\\\"must\\\":[{\\\"term\\\":{\\\"type.keyword\\\":\\\"outbound-request\\\"}},{\\\"term\\\":{\\\"outbound_request_url.keyword\\\":\\\"https://privhq.ssrn.com/rest/authors\\\"}}]}}}}\",\"disabled\":false,\"alias\":\"Request https://privhq.ssrn.com/rest/authors\"},\"query\":{\"bool\":{\"filter\":{\"bool\":{\"must\":[{\"term\":{\"type.keyword\":\"outbound-request\"}},{\"term\":{\"outbound_request_url.keyword\":\"https://privhq.ssrn.com/rest/authors\"}}]}}}},\"$state\":{\"store\":\"appState\"}},{\"meta\":{\"negate\":false,\"index\":\"logstash-*\",\"key\":\"service\",\"value\":\"authors-replicator\",\"disabled\":false,\"alias\":null},\"query\":{\"match\":{\"service\":{\"query\":\"authors-replicator\",\"type\":\"phrase\"}}},\"$state\":{\"store\":\"appState\"}}]}"
+      }
+    }
+  },
+  {
+    "_id": "1cd414b0-c3d9-11e7-a772-0b9b84e3d9b9",
+    "_type": "search",
+    "_source": {
+      "title": "[Service] [Papers] [Replicator] Event Feed Outbound Requests",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "type",
+        "outbound_request_method",
+        "outbound_request_url",
+        "outbound_request_response_code"
+      ],
+      "sort": [
+        "@timestamp",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"logstash-*\",\"highlightAll\":true,\"filter\":[{\"$state\":{\"store\":\"appState\"},\"meta\":{\"alias\":\"Papers Replicator\",\"disabled\":false,\"index\":\"logstash-*\",\"key\":\"query\",\"negate\":false,\"value\":\"{\\\"bool\\\":{\\\"filter\\\":{\\\"term\\\":{\\\"service.keyword\\\":\\\"papers-replicator\\\"}}}}\"},\"query\":{\"bool\":{\"filter\":{\"term\":{\"service.keyword\":\"papers-replicator\"}}}}},{\"$state\":{\"store\":\"appState\"},\"meta\":{\"alias\":\"Outbound Requests & Responses\",\"disabled\":false,\"index\":\"logstash-*\",\"key\":\"query\",\"negate\":false,\"value\":\"{\\\"bool\\\":{\\\"filter\\\":{\\\"bool\\\":{\\\"should\\\":[{\\\"term\\\":{\\\"type.keyword\\\":\\\"outbound-request\\\"}},{\\\"term\\\":{\\\"type.keyword\\\":\\\"outbound-request-response\\\"}}]}}}}\"},\"query\":{\"bool\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"type.keyword\":\"outbound-request\"}},{\"term\":{\"type.keyword\":\"outbound-request-response\"}}]}}}}},{\"meta\":{\"negate\":false,\"index\":\"logstash-*\",\"key\":\"query\",\"value\":\"{\\\"bool\\\":{\\\"filter\\\":{\\\"term\\\":{\\\"logger.keyword\\\":\\\"com.ssrn.papers.replicator.http_old_platform_paper_events_feed.PageSource\\\"}}}}\",\"disabled\":false,\"alias\":\"Event Feed Logger\"},\"query\":{\"bool\":{\"filter\":{\"term\":{\"logger.keyword\":\"com.ssrn.papers.replicator.http_old_platform_paper_events_feed.PageSource\"}}}},\"$state\":{\"store\":\"appState\"}}],\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}}}"
+      }
+    }
+  },
+  {
+    "_id": "a8255430-e3f9-11e7-8292-6d23b660c9f6",
+    "_type": "search",
+    "_source": {
+      "title": "[Service] [Search] [Author-Updates-Subscriber]",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "level"
+      ],
+      "sort": [
+        "@timestamp",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"logstash-*\",\"highlightAll\":true,\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}},\"filter\":[{\"meta\":{\"negate\":false,\"index\":\"logstash-*\",\"key\":\"query\",\"value\":\"{\\\"bool\\\":{\\\"filter\\\":{\\\"term\\\":{\\\"service.keyword\\\":\\\"author-updates-subscriber\\\"}}}}\",\"disabled\":false,\"alias\":\"Author Updates Subscriber\"},\"query\":{\"bool\":{\"filter\":{\"term\":{\"service.keyword\":\"author-updates-subscriber\"}}}},\"$state\":{\"store\":\"appState\"}}]}"
+      }
+    }
+  },
+  {
+    "_id": "2d23e290-f9db-11e7-8ba9-73177d0612bd",
+    "_type": "search",
+    "_source": {
+      "title": "[Service] [Authors] [Replicator] Inbound Entity Replication Requests",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "service",
+        "inbound_request_http_method",
+        "inbound_request_request_path",
+        "inbound_request_response_code"
+      ],
+      "sort": [
+        "@timestamp",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"logstash-*\",\"highlightAll\":true,\"filter\":[{\"meta\":{\"negate\":false,\"index\":\"logstash-*\",\"key\":\"query\",\"value\":\"{\\\"bool\\\":{\\\"filter\\\":{\\\"term\\\":{\\\"service.keyword\\\":\\\"authors-replicator\\\"}}}}\",\"disabled\":false,\"alias\":\"Authors Replicator\"},\"query\":{\"bool\":{\"filter\":{\"term\":{\"service.keyword\":\"authors-replicator\"}}}},\"$state\":{\"store\":\"appState\"}},{\"meta\":{\"negate\":true,\"index\":\"logstash-*\",\"key\":\"query\",\"value\":\"{\\\"bool\\\":{\\\"filter\\\":{\\\"term\\\":{\\\"inbound_request_http_user_agent.keyword\\\":\\\"\\\\\\\"ELB-HealthChecker/2.0\\\\\\\"\\\"}}}}\",\"disabled\":false,\"alias\":\"Load Balancer Healthchecks\"},\"query\":{\"bool\":{\"filter\":{\"term\":{\"inbound_request_http_user_agent.keyword\":\"\\\"ELB-HealthChecker/2.0\\\"\"}}}},\"$state\":{\"store\":\"appState\"}},{\"meta\":{\"negate\":false,\"index\":\"logstash-*\",\"key\":\"query\",\"value\":\"{\\\"bool\\\":{\\\"filter\\\":{\\\"term\\\":{\\\"type.keyword\\\":\\\"inbound-request\\\"}}}}\",\"disabled\":false,\"alias\":\"Inbound Request\"},\"query\":{\"bool\":{\"filter\":{\"term\":{\"type.keyword\":\"inbound-request\"}}}},\"$state\":{\"store\":\"appState\"}},{\"meta\":{\"negate\":false,\"index\":\"logstash-*\",\"key\":\"inbound_request_request_path\",\"value\":\"/jobs/entity-replication\",\"disabled\":false,\"alias\":null},\"query\":{\"match\":{\"inbound_request_request_path\":{\"query\":\"/jobs/entity-replication\",\"type\":\"phrase\"}}},\"$state\":{\"store\":\"appState\"}}],\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}}}"
+      }
+    }
+  },
+  {
+    "_id": "26fd7250-e3fb-11e7-8292-6d23b660c9f6",
+    "_type": "search",
+    "_source": {
+      "title": "[Service] [Authors] [Replicator]",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "level",
+        "log_message"
+      ],
+      "sort": [
+        "@timestamp",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"logstash-*\",\"highlightAll\":true,\"filter\":[{\"meta\":{\"negate\":false,\"index\":\"logstash-*\",\"key\":\"query\",\"value\":\"{\\\"bool\\\":{\\\"filter\\\":{\\\"term\\\":{\\\"service.keyword\\\":\\\"authors-replicator\\\"}}}}\",\"disabled\":false,\"alias\":\"Authors Replicator\"},\"query\":{\"bool\":{\"filter\":{\"term\":{\"service.keyword\":\"authors-replicator\"}}}},\"$state\":{\"store\":\"appState\"}},{\"meta\":{\"negate\":true,\"index\":\"logstash-*\",\"key\":\"query\",\"value\":\"{\\\"bool\\\":{\\\"filter\\\":{\\\"term\\\":{\\\"inbound_request_http_user_agent.keyword\\\":\\\"\\\\\\\"ELB-HealthChecker/2.0\\\\\\\"\\\"}}}}\",\"disabled\":false,\"alias\":\"Load Balancer Healthchecks\"},\"query\":{\"bool\":{\"filter\":{\"term\":{\"inbound_request_http_user_agent.keyword\":\"\\\"ELB-HealthChecker/2.0\\\"\"}}}},\"$state\":{\"store\":\"appState\"}}]}"
+      }
+    }
+  },
+  {
+    "_id": "c8246840-f9dc-11e7-9ab1-4d03baea3d8c",
+    "_type": "search",
+    "_source": {
+      "title": "[Service] [Authors] [Replicator] Inbound Event Replication Requests",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "service",
+        "inbound_request_http_method",
+        "inbound_request_request_path",
+        "inbound_request_response_code"
+      ],
+      "sort": [
+        "@timestamp",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"logstash-*\",\"highlightAll\":true,\"filter\":[{\"$state\":{\"store\":\"appState\"},\"meta\":{\"alias\":\"Inbound Request\",\"disabled\":false,\"index\":\"logstash-*\",\"key\":\"query\",\"negate\":false,\"value\":\"{\\\"bool\\\":{\\\"filter\\\":{\\\"term\\\":{\\\"type.keyword\\\":\\\"inbound-request\\\"}}}}\"},\"query\":{\"bool\":{\"filter\":{\"term\":{\"type.keyword\":\"inbound-request\"}}}}},{\"$state\":{\"store\":\"appState\"},\"meta\":{\"alias\":\"Load Balancer Healthchecks\",\"disabled\":false,\"index\":\"logstash-*\",\"key\":\"query\",\"negate\":true,\"value\":\"{\\\"bool\\\":{\\\"filter\\\":{\\\"term\\\":{\\\"inbound_request_http_user_agent.keyword\\\":\\\"\\\\\\\"ELB-HealthChecker/2.0\\\\\\\"\\\"}}}}\"},\"query\":{\"bool\":{\"filter\":{\"term\":{\"inbound_request_http_user_agent.keyword\":\"\\\"ELB-HealthChecker/2.0\\\"\"}}}}},{\"$state\":{\"store\":\"appState\"},\"meta\":{\"alias\":\"Authors Replicator\",\"disabled\":false,\"index\":\"logstash-*\",\"key\":\"query\",\"negate\":false,\"value\":\"{\\\"bool\\\":{\\\"filter\\\":{\\\"term\\\":{\\\"service.keyword\\\":\\\"authors-replicator\\\"}}}}\"},\"query\":{\"bool\":{\"filter\":{\"term\":{\"service.keyword\":\"authors-replicator\"}}}}},{\"$state\":{\"store\":\"appState\"},\"meta\":{\"alias\":null,\"disabled\":false,\"index\":\"logstash-*\",\"key\":\"inbound_request_request_path\",\"negate\":false,\"value\":\"/jobs/event-replication\"},\"query\":{\"match\":{\"inbound_request_request_path\":{\"query\":\"/jobs/event-replication\",\"type\":\"phrase\"}}}}],\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}}}"
+      }
+    }
+  },
+  {
+    "_id": "08915090-f9d9-11e7-8876-15fb4a4eb898",
+    "_type": "search",
+    "_source": {
+      "title": "[Service] [Authors] [Replicator] Event Feed Outbound Requests",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "type",
+        "outbound_request_method",
+        "outbound_request_url",
+        "outbound_request_response_code"
+      ],
+      "sort": [
+        "@timestamp",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"logstash-*\",\"highlightAll\":true,\"filter\":[{\"meta\":{\"negate\":false,\"index\":\"logstash-*\",\"key\":\"query\",\"value\":\"{\\\"bool\\\":{\\\"filter\\\":{\\\"term\\\":{\\\"service.keyword\\\":\\\"authors-replicator\\\"}}}}\",\"disabled\":false,\"alias\":\"Authors Replicator\"},\"query\":{\"bool\":{\"filter\":{\"term\":{\"service.keyword\":\"authors-replicator\"}}}},\"$state\":{\"store\":\"appState\"}},{\"meta\":{\"negate\":false,\"index\":\"logstash-*\",\"key\":\"query\",\"value\":\"{\\\"bool\\\":{\\\"filter\\\":{\\\"bool\\\":{\\\"should\\\":[{\\\"term\\\":{\\\"type.keyword\\\":\\\"outbound-request\\\"}},{\\\"term\\\":{\\\"type.keyword\\\":\\\"outbound-request-response\\\"}}]}}}}\",\"disabled\":false,\"alias\":\"Outbound Requests & Responses\"},\"query\":{\"bool\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"type.keyword\":\"outbound-request\"}},{\"term\":{\"type.keyword\":\"outbound-request-response\"}}]}}}},\"$state\":{\"store\":\"appState\"}},{\"meta\":{\"negate\":false,\"index\":\"logstash-*\",\"key\":\"query\",\"value\":\"{\\\"bool\\\":{\\\"filter\\\":{\\\"term\\\":{\\\"logger.keyword\\\":\\\"com.ssrn.authors.replicator.http_old_platform_author_events_feed.PageSource\\\"}}}}\",\"disabled\":false,\"alias\":\"Event Feed Logger\"},\"query\":{\"bool\":{\"filter\":{\"term\":{\"logger.keyword\":\"com.ssrn.authors.replicator.http_old_platform_author_events_feed.PageSource\"}}}},\"$state\":{\"store\":\"appState\"}}]}"
+      }
+    }
+  },
+  {
+    "_id": "890b7fc0-e3fe-11e7-a435-43b7ec0dc461",
+    "_type": "search",
+    "_source": {
+      "title": "[Service] [Authors] [Replicator] Entity Feed Outbound Requests",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "type",
+        "outbound_request_method",
+        "outbound_request_url",
+        "outbound_request_response_code"
+      ],
+      "sort": [
+        "@timestamp",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"logstash-*\",\"highlightAll\":true,\"filter\":[{\"meta\":{\"negate\":false,\"index\":\"logstash-*\",\"key\":\"service\",\"value\":\"authors-replicator\",\"disabled\":false,\"alias\":\"Authors Replicator\"},\"query\":{\"match\":{\"service\":{\"query\":\"authors-replicator\",\"type\":\"phrase\"}}},\"$state\":{\"store\":\"appState\"}},{\"meta\":{\"negate\":false,\"index\":\"logstash-*\",\"key\":\"query\",\"value\":\"{\\\"bool\\\":{\\\"filter\\\":{\\\"bool\\\":{\\\"should\\\":[{\\\"term\\\":{\\\"type.keyword\\\":\\\"outbound-request\\\"}},{\\\"term\\\":{\\\"type.keyword\\\":\\\"outbound-request-response\\\"}}]}}}}\",\"disabled\":false,\"alias\":\"Outbound Requests & Responses\"},\"query\":{\"bool\":{\"filter\":{\"bool\":{\"should\":[{\"term\":{\"type.keyword\":\"outbound-request\"}},{\"term\":{\"type.keyword\":\"outbound-request-response\"}}]}}}},\"$state\":{\"store\":\"appState\"}},{\"meta\":{\"negate\":false,\"index\":\"logstash-*\",\"key\":\"query\",\"value\":\"{\\\"bool\\\":{\\\"filter\\\":{\\\"term\\\":{\\\"logger.keyword\\\":\\\"com.ssrn.authors.replicator.http_old_platform_author_entities_feed.PageSource\\\"}}}}\",\"disabled\":false,\"alias\":\"Entity Feed Logger\"},\"query\":{\"bool\":{\"filter\":{\"term\":{\"logger.keyword\":\"com.ssrn.authors.replicator.http_old_platform_author_entities_feed.PageSource\"}}}},\"$state\":{\"store\":\"appState\"}}]}"
+      }
+    }
+  },
+  {
+    "_id": "ce598220-f1fa-11e7-b2bb-ed2756f82fbd",
+    "_type": "visualization",
+    "_source": {
+      "title": "[Global] Error Rates",
+      "visState": "{\"title\":\"[Global] Error Rates\",\"type\":\"line\",\"params\":{\"addTooltip\":true,\"addLegend\":true,\"legendPosition\":\"right\",\"showCircles\":true,\"interpolate\":\"linear\",\"scale\":\"linear\",\"drawLinesBetweenPoints\":true,\"radiusRatio\":9,\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"enabled\":true,\"type\":\"date_histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"@timestamp\",\"interval\":\"auto\",\"customInterval\":\"2h\",\"min_doc_count\":1,\"extended_bounds\":{}}},{\"id\":\"3\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"group\",\"params\":{\"field\":\"service.keyword\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"_term\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "savedSearchId": "26e9f870-c21c-11e7-ae4b-073aaeb494fb",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "bdf84d10-f9db-11e7-8ba9-73177d0612bd",
+    "_type": "visualization",
+    "_source": {
+      "title": "[Service] [Authors] [Replicator] Entity Replication Job Response Codes",
+      "visState": "{\"title\":\"[Service] [Authors] [Replicator] Entity Replication Job Response Codes\",\"type\":\"area\",\"params\":{\"addTooltip\":true,\"addLegend\":true,\"legendPosition\":\"right\",\"scale\":\"linear\",\"interpolate\":\"linear\",\"mode\":\"stacked\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"enabled\":true,\"type\":\"date_histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"@timestamp\",\"interval\":\"auto\",\"customInterval\":\"2h\",\"min_doc_count\":1,\"extended_bounds\":{}}},{\"id\":\"3\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"group\",\"params\":{\"field\":\"inbound_request_response_code\",\"size\":5,\"order\":\"asc\",\"orderBy\":\"_term\",\"customLabel\":\"Response Code\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "savedSearchId": "2d23e290-f9db-11e7-8ba9-73177d0612bd",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "06635030-f9dd-11e7-9ab1-4d03baea3d8c",
+    "_type": "visualization",
+    "_source": {
+      "title": "[Service] [Authors] [Replicator] Event Replication Job Response Codes",
+      "visState": "{\"title\":\"[Service] [Authors] [Replicator] Event Replication Job Response Codes\",\"type\":\"area\",\"params\":{\"addTooltip\":true,\"addLegend\":true,\"legendPosition\":\"right\",\"scale\":\"linear\",\"interpolate\":\"linear\",\"mode\":\"stacked\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"enabled\":true,\"type\":\"date_histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"@timestamp\",\"interval\":\"auto\",\"customInterval\":\"2h\",\"min_doc_count\":1,\"extended_bounds\":{}}},{\"id\":\"3\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"group\",\"params\":{\"field\":\"inbound_request_response_code\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"1\",\"customLabel\":\"Response Code\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "savedSearchId": "c8246840-f9dc-11e7-9ab1-4d03baea3d8c",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "fa8823a0-c942-11e7-88a2-4bc0e3021f6b",
+    "_type": "visualization",
+    "_source": {
+      "title": "[Service] [Papers] [Replicator] Event Replication Job Response Codes",
+      "visState": "{\"title\":\"[Service] [Papers] [Replicator] Event Replication Job Response Codes\",\"type\":\"area\",\"params\":{\"addTooltip\":true,\"addLegend\":true,\"legendPosition\":\"right\",\"scale\":\"linear\",\"interpolate\":\"linear\",\"mode\":\"stacked\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"enabled\":true,\"type\":\"date_histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"@timestamp\",\"interval\":\"auto\",\"customInterval\":\"2h\",\"min_doc_count\":1,\"extended_bounds\":{}}},{\"id\":\"3\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"group\",\"params\":{\"field\":\"inbound_request_response_code\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"_term\",\"customLabel\":\"Response Code\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "savedSearchId": "9cc6fac0-c942-11e7-88a2-4bc0e3021f6b",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "5d6b2ce0-26d3-11e8-b30c-cd539722ed15",
+    "_type": "visualization",
+    "_source": {
+      "title": "Authors Entity Feed REST Response Codes",
+      "visState": "{\"title\":\"Authors Entity Feed REST Response Codes\",\"type\":\"area\",\"params\":{\"addTooltip\":true,\"addLegend\":true,\"legendPosition\":\"right\",\"scale\":\"linear\",\"interpolate\":\"linear\",\"mode\":\"percentage\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"enabled\":true,\"type\":\"date_histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"@timestamp\",\"interval\":\"auto\",\"customInterval\":\"2h\",\"min_doc_count\":1,\"extended_bounds\":{}}},{\"id\":\"3\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"group\",\"params\":{\"field\":\"outbound_request_response_code\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"_term\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "savedSearchId": "890b7fc0-e3fe-11e7-a435-43b7ec0dc461",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "81f7dd60-26d3-11e8-b30c-cd539722ed15",
+    "_type": "visualization",
+    "_source": {
+      "title": "Authors Event Feed REST Response Codes",
+      "visState": "{\"title\":\"Authors Event Feed REST Response Codes\",\"type\":\"area\",\"params\":{\"addTooltip\":true,\"addLegend\":true,\"legendPosition\":\"right\",\"scale\":\"linear\",\"interpolate\":\"linear\",\"mode\":\"percentage\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"enabled\":true,\"type\":\"date_histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"@timestamp\",\"interval\":\"auto\",\"customInterval\":\"2h\",\"min_doc_count\":1,\"extended_bounds\":{}}},{\"id\":\"3\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"group\",\"params\":{\"field\":\"outbound_request_response_code\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "savedSearchId": "08915090-f9d9-11e7-8876-15fb4a4eb898",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "e7de75b0-c942-11e7-88a2-4bc0e3021f6b",
+    "_type": "visualization",
+    "_source": {
+      "title": "[Service] [Papers] [Replicator] Entity Replication Job Response Codes",
+      "visState": "{\"title\":\"[Service] [Papers] [Replicator] Entity Replication Job Response Codes\",\"type\":\"area\",\"params\":{\"addTooltip\":true,\"addLegend\":true,\"legendPosition\":\"right\",\"scale\":\"linear\",\"interpolate\":\"linear\",\"mode\":\"stacked\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false,\"orderBucketsBySum\":false},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"enabled\":true,\"type\":\"date_histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"@timestamp\",\"interval\":\"auto\",\"customInterval\":\"2h\",\"min_doc_count\":1,\"extended_bounds\":{}}},{\"id\":\"3\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"group\",\"params\":{\"field\":\"inbound_request_response_code\",\"size\":5,\"order\":\"asc\",\"orderBy\":\"_term\",\"customLabel\":\"Response Code\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "savedSearchId": "a75e0230-c942-11e7-88a2-4bc0e3021f6b",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "9adaddf0-26d3-11e8-b30c-cd539722ed15",
+    "_type": "visualization",
+    "_source": {
+      "title": "Papers Entities Feed REST Response Codes",
+      "visState": "{\"title\":\"Papers Entities Feed REST Response Codes\",\"type\":\"area\",\"params\":{\"addTooltip\":true,\"addLegend\":true,\"legendPosition\":\"right\",\"scale\":\"linear\",\"interpolate\":\"linear\",\"mode\":\"percentage\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"enabled\":true,\"type\":\"date_histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"@timestamp\",\"interval\":\"auto\",\"customInterval\":\"2h\",\"min_doc_count\":1,\"extended_bounds\":{}}},{\"id\":\"3\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"group\",\"params\":{\"field\":\"outbound_request_response_code\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "savedSearchId": "000dbf70-c3d9-11e7-a772-0b9b84e3d9b9",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "b909eaf0-26d3-11e8-b30c-cd539722ed15",
+    "_type": "visualization",
+    "_source": {
+      "title": "Papers Events Feed REST Response Codes",
+      "visState": "{\"title\":\"Papers Events Feed REST Response Codes\",\"type\":\"area\",\"params\":{\"addLegend\":true,\"addTimeMarker\":false,\"addTooltip\":true,\"defaultYExtents\":false,\"interpolate\":\"linear\",\"legendPosition\":\"right\",\"mode\":\"percentage\",\"scale\":\"linear\",\"setYExtents\":false,\"times\":[]},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"enabled\":true,\"type\":\"date_histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"@timestamp\",\"interval\":\"auto\",\"customInterval\":\"2h\",\"min_doc_count\":1,\"extended_bounds\":{}}},{\"id\":\"3\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"group\",\"params\":{\"field\":\"outbound_request_response_code\",\"size\":5,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "savedSearchId": "1cd414b0-c3d9-11e7-a772-0b9b84e3d9b9",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[]}"
+      }
+    }
+  }
+]

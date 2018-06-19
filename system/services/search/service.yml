@@ -1,0 +1,4 @@
+---
+name: search
+components: ['api', 'papers-consumer', 'author-updates-subscriber']
+fake-services: ['papers-consumer/fake-papers-service', 'author-updates-subscriber/fake-authors-service']

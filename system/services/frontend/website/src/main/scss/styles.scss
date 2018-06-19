@@ -1,0 +1,142 @@
+@import "vendor/normalize";
+@import "imports/flex";
+@import "imports/fonts";
+@import "imports/variables";
+@import "imports/mixins";
+@import "imports/icons";
+@import "imports/buttons";
+@import "imports/forms";
+@import "partials/header";
+@import "partials/footer";
+
+* {
+    box-sizing: border-box;
+    font-size: $default_font_size;
+    font-family: nexus_sans, sans-serif;
+    &:first-child {
+        margin-top: 0;
+    }
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.large-text {
+    font-size: 18px;
+}
+
+.hidden {
+    display: none;
+}
+
+.central {
+    text-align: center;
+}
+
+.left-align {
+    text-align: left;
+}
+
+.centered {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.bordered-bottom {
+    border-bottom: 1px solid $border_grey;
+}
+
+ul.reset,
+ol.reset {
+    margin: 0;
+    padding: 0;
+}
+
+ul.reset li {
+    list-style: none;
+}
+
+ol.reset.line-up {
+    padding-left: 15px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: nexus_serif, sans-serif;
+    font-weight: 500;
+    margin-bottom: 30px;
+}
+
+h1 {
+    font-size: $main_header_size;
+    line-height: $main_header_line_height;
+    margin-bottom: $section_padding / 2;
+}
+
+h4 {
+    font-family: nexus_sans, sans-serif;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+p {
+    margin-top: 0;
+}
+
+html,
+body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    background: $background_grey;
+    color: $content_grey;
+}
+
+body {
+    @include flexbox;
+    @include flex-direction(column);
+}
+
+main {
+    @include flex-grow(1);
+}
+
+.wrapper {
+    width: $site_full_width;
+    max-width: 100%;
+    padding-left: $wrapper_padding;
+    padding-right: $wrapper_padding;
+    margin-left: auto;
+    margin-right: auto;
+    @include breakpoint($breakpoint_large) {
+        width: 970px;
+    }
+    @include breakpoint($breakpoint_med) {
+        width: 750px;
+    }
+}
+
+main {
+    & > section {
+        padding-top: $section_padding;
+        padding-bottom: $section_padding;
+    }
+}
+
+.panel {
+    padding: $section_padding / 2;
+    border: 1px solid $border_grey;
+    background: $white;
+}
+
+img.lazy {
+    opacity: 0;
+    @include transition(opacity 0.2s ease);
+    &[data-loaded="true"] {
+        opacity: 1;
+    }
+}

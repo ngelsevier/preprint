@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: io.takari.junit:takari-cpsuite:1.2.7">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.takari.junit/takari-cpsuite/1.2.7/6d30ab231a73f865a3146ca4b9e3299d2f415426/takari-cpsuite-1.2.7.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.takari.junit/takari-cpsuite/1.2.7/5fca31c797f45ca172822f4dfaa8f00d0b397907/takari-cpsuite-1.2.7-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

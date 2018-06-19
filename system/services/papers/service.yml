@@ -1,0 +1,4 @@
+---
+name: papers
+components: ['emitter', 'replicator']
+fake-services: ['/test/support/fake-old-platform']

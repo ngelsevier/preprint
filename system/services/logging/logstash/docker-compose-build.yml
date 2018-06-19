@@ -1,0 +1,10 @@
+version: '2.1'
+services:
+  service:
+    extends:
+      file: docker-compose.yml
+      service: service
+    build: .
+    volumes:
+      - ./logstash.conf:/etc/logstash/conf.d/logstash.conf
+      - ./log4j2.properties:/etc/logstash/log4j2.properties

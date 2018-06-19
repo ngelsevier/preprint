@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: com.jayway.jsonpath:json-path-assert:2.2.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jayway.jsonpath/json-path-assert/2.2.0/120f64646a7f59b15743ee027330664028b3f4d5/json-path-assert-2.2.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jayway.jsonpath/json-path-assert/2.2.0/b8405c08eb85614387408e2f9791b0c56666559b/json-path-assert-2.2.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

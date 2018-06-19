@@ -1,0 +1,5 @@
+*
+!supervisord.conf
+!requirements.txt
+!scheduler.sh
+!job.py

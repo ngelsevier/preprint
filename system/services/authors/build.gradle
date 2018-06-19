@@ -1,0 +1,65 @@
+apply plugin: 'java'
+
+ext {
+    serviceRoot = true
+}
+
+repositories {
+    mavenCentral()
+}
+
+sourceSets {
+    serviceTest {
+        java {
+            srcDirs = files('src/service-test/java')
+        }
+
+        resources.srcDirs = files('src/service-test/resources')
+    }
+    authorServiceContractTest {
+        java {
+            srcDirs = files('../search/author-updates-subscriber/src/author-service-contract-test/java')
+        }
+
+        resources.srcDirs = files('../search/author-updates-subscriber/src/author-service-contract-test/resources')
+    }
+}
+
+dependencies {
+    serviceTestCompile(
+            'junit:junit:4.12',
+            'org.hamcrest:java-hamcrest:2.0.0.0',
+            'com.jayway.jsonpath:json-path-assert:2.2.0',
+            project(':test:support'),
+            project(':test:support:fake-old-platform'),
+    )
+    authorServiceContractTestCompile(
+            'junit:junit:4.12',
+            'org.hamcrest:java-hamcrest:2.0.0.0',
+            'com.amazonaws:amazon-kinesis-client:1.9.0',
+            'com.jayway.jsonpath:json-path:2.3.0',
+            'com.jayway.jsonpath:json-path-assert:2.2.0',
+            project(':test:support'),
+            project(':test:support:golden-data'),
+            project(':services:search:author-updates-subscriber:fake-authors-service')
+    )
+}
+
+task serviceTest(type: Test) {
+    description = 'Runs the service tests.'
+    group = 'verification'
+    testClassesDir = sourceSets.serviceTest.output.classesDir
+    classpath = sourceSets.serviceTest.runtimeClasspath
+    shouldRunAfter subprojects.collect { it.tasks.withType(Test) }
+}
+
+task systemLevelInterServiceContractTest(type: Test) {
+    ext.interServiceContractTest = true
+    description = 'Runs the author service contract tests.'
+    group = 'verification'
+    testClassesDir = sourceSets.authorServiceContractTest.output.classesDir
+    classpath = sourceSets.authorServiceContractTest.runtimeClasspath
+    shouldRunAfter 'test'
+
+    environment 'AUTHOR_SERVICE_CONTRACT_TEST_REAL_TARGET', 'true'
+}

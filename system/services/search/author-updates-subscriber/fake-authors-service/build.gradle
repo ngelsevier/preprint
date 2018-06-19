@@ -1,0 +1,17 @@
+apply plugin: 'java'
+
+ext {
+    portable_classpath = true
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile(
+            "io.dropwizard:dropwizard-core:${dropwizardVersion}",
+            project(':test:support')
+    )
+
+}

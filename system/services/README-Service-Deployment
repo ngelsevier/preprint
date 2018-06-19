@@ -1,0 +1,11 @@
+1. Cloudwatch Alarm notifications require users to manually subscribe to topic
+
+In order to get notifications by email (or other means) when Cloudwatch alarms trigger, one needs to manually subscribe
+to the Amazon SNS topic 'arn:aws:sns:us-east-1:756659522569:ssrn-production-cloudwatch-alarm-topic'.  Do this using the
+following method:
+
+a. Go to the SNS control panel https://console.aws.amazon.com/sns/v2/home?region=us-east-1#/topics
+b. Choose the 'ssrn-production-cloudwatch-alarm-topic' topic
+c. Choose 'Subscribe to topic' from the 'Actions' menu
+d. Enter your email address
+e. You will receive an email to confirm your subscription.  You MUST do this before you'll receive notifications.

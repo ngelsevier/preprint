@@ -1,0 +1,4 @@
+---
+name: frontend
+components: ['website']
+fake-services: ['website/fake-search-service', '/test/support/fake-old-platform']

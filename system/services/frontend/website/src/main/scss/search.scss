@@ -1,0 +1,157 @@
+@import "imports/flex";
+@import "imports/variables";
+@import "imports/mixins";
+
+section.search {
+    form:not(:last-child) {
+        margin-bottom: $section_padding;
+    }
+    .search-box-wrapper {
+        @include flexbox;
+        @include justify-content(space-around);
+        @include align-items(stretch);
+        width: $search_width;
+        max-width: 100%;
+        border: 1px solid $border_grey_dark;
+        background: $white;
+        @include transition(background-color 0.2s ease);
+        input,
+        button {
+            border: none;
+            background: transparent;
+            outline: none;
+            border-radius: 0;
+        }
+        input {
+            width: 100%;
+            font-size: 20px;
+            padding: $search_box_padding_vertical 0 $search_box_padding_vertical $search_box_padding_horizontal;
+        }
+        button {
+            @include flex-shrink(0);
+            height: auto;
+            width: auto;
+            cursor: pointer;
+            color: $ssrn_blue;
+            padding: $search_box_padding_vertical $search_box_padding_horizontal;
+            i {
+                font-size: 25px;
+            }
+        }
+        &:hover {
+            background-color: #fbfbfb;
+        }
+    }
+    .readme {
+        width: $search_width - 30px;
+        max-width: 100%;
+    }
+}
+
+section.results {
+    .search-terms {
+        font-weight: bold;
+        margin-bottom: 6px;
+    }
+    .search-result-count {
+        margin-bottom: 35px;
+    }
+    ol.line-up {
+        padding-left: 0;
+        li {
+            list-style: none;
+            &:not(:last-child) {
+                margin-bottom: 30px;
+            }
+            & > div {
+                @include inline-flex;
+                @include align-items(flex-start);
+                width: 100%;
+                margin-bottom: 8px;
+                vertical-align: sub;
+                & > i,
+                & > .circle-image-wrapper {
+                    @include flexbox;
+                    @include align-items(center);
+                    @include justify-content(center);
+                    @include flex-shrink(0);
+                    height: $search_result_image_size;
+                    width: $search_result_image_size;
+                    border-radius: 50%;
+                    background: $search_result_icon_grey;
+                    margin-right: 12px;
+                    overflow: hidden;
+                    img {
+                        height: 100%;
+                        width: 100%;
+                    }
+                }
+                & > i {
+                    font-size: 20px;
+                    &::before {
+                        height: 23px;
+                        width: 18px;
+                    }
+                }
+            }
+            &.author > div {
+                @include align-items(center);
+            }
+            a.primary {
+                display: block;
+                text-decoration: underline;
+                color: $content_grey;
+                &,
+                span {
+                    font-size: 22px;
+                    line-height: 22px;
+                }
+            }
+            .author-list {
+                margin-top: 8px;
+                span {
+                    display: inline-block;
+                    &:not(:last-child)::after {
+                        content: ', ';
+                        color: $link_blue;
+                    }
+                }
+                a {
+                    color: $link_blue;
+                    text-decoration: none;
+                }
+            }
+            em {
+                font-style: normal;
+                font-size: inherit;
+                font-weight: bold;
+            }
+        }
+    }
+    .results-pagination {
+        @include flexbox;
+        @include justify-content(space-between);
+        margin-top: 25px;
+        &.next-only {
+            @include justify-content(flex-end);
+        }
+        .button-wrapper a.button {
+            @include inline-flex;
+            border: none;
+            padding: 0;
+            * {
+                font-size: 18px;
+            }
+            i {
+                margin-right: 5px;
+            }
+        }
+        .button-wrapper:last-child a.button,
+        &.next-only .button-wrapper a.button {
+            i {
+                margin-left: 5px;
+                margin-right: 0;
+            }
+        }
+    }
+}

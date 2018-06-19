@@ -1,0 +1,9 @@
+<div id="headerId">
+    <a href="/submissions/CreateNewAbstract.cfm" id="submitPaperLink">Submit a paper</a>
+</div>
+<form method="post" action="/Participant.cfm?rectype=edit&partID={{partId}}">
+    <input type="hidden" name="partId" value="{{partId}}"/>
+    <input type="text" name="txtPrefFirstName"/>
+    <input type="text" name="txtPrefLastName"/>
+    <input type="submit" id="btnSubmit"/>
+</form>

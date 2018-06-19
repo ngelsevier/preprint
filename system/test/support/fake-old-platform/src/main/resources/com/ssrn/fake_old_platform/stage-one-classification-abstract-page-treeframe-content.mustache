@@ -1,0 +1,19 @@
+<html>
+    <body>
+        <form name="form1" action="Stage1ClassDB.cfm" method="POST" target="_top">
+            <input type=hidden name="AbstractID" value="{{abstractId}}"\>
+            <a href="abstract_id={{abstractId}}">{{abstractId}}</a>
+            <input type="checkbox" name="NO_NET_CLASS" {{consideredIrrelevant}} />&nbsp;Exclude from Search, Classification &amp; Distribution
+            <select name="cboStatus" id="cboStatus">
+                <option selected>RECEIVED</option>
+                <option>DELETED</option>
+                <option>REMOVED</option>
+                <option>APPROVED-RESTRICTED</option>
+                <option>APPROVED</option>
+            </select>
+            <p>
+                <input type="submit" name="cmdSave" />
+            </p>
+        </form>
+    </body>
+</html>

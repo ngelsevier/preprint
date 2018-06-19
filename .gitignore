@@ -1,0 +1,12 @@
+/.idea/
+.terraform/
+terraform.tfstate.backup
+/*.lock
+*.iml
+build/
+*.pyc
+out/
+package.tgz
+.gradle
+*.zip
+screenshots/

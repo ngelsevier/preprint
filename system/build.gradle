@@ -1,0 +1,159 @@
+ext.dropwizardVersion = '1.3.1'
+
+subprojects {
+    apply plugin: 'java'
+
+    ext.configureSourceSetOutputPaths = { sourceSet ->
+        def sourceSetIdentifier = sourceSet.name == 'main' ? 'production' : sourceSet.name
+        sourceSet.output.classesDir = new File(buildDir, "${sourceSetIdentifier}/classes")
+        sourceSet.output.resourcesDir = new File(buildDir, "${sourceSetIdentifier}/resources")
+    }
+
+    buildDir = new File(projectDir, 'out')
+    configureSourceSetOutputPaths(sourceSets.main)
+    configureSourceSetOutputPaths(sourceSets.test)
+    sourceSets.whenObjectAdded { sourceSet -> configureSourceSetOutputPaths(sourceSet) }
+
+    afterEvaluate { project ->
+        if (project.plugins.hasPlugin('java')) {
+            tasks.withType(Test) {
+                testLogging {
+                    events 'started', 'passed', 'skipped', 'failed'
+                    showStandardStreams = true
+                    showExceptions = true
+                    showStackTraces = true
+                    showCauses = true
+                    exceptionFormat = 'FULL'
+                    stackTraceFilters = []
+                }
+
+                outputs.upToDateWhen {
+                    false
+                }
+
+                reports.html.destination = file("${reporting.baseDir}/${name}")
+                reports.junitXml.destination = file("${buildDir}/test-results/${name}")
+            }
+
+            jar {
+                // Avoids cache-busting docker images caused by project dependency jar checksum changing due to changing timestamps of jar contents
+                preserveFileTimestamps false
+            }
+
+            if (project.ext.has('portable_classpath')) {
+
+                def externalRuntimeLibrariesDirectoryPath = "$buildDir/production/external-runtime-libraries"
+                def internalRuntimeLibrariesDirectoryPath = "$buildDir/production/internal-runtime-libraries"
+
+                task cleanExternalRuntimeLibraries(type: Delete) {
+                    delete externalRuntimeLibrariesDirectoryPath
+                }
+
+                task cleanInternalRuntimeLibraries(type: Delete) {
+                    delete internalRuntimeLibrariesDirectoryPath
+                }
+
+                task copyExternalRuntimeLibraries(type: Copy) {
+                    description 'Assembles external runtime libraries'
+                    into externalRuntimeLibrariesDirectoryPath
+                    from configurations.runtime.findAll { it.toString().contains('.gradle') }
+                    dependsOn cleanExternalRuntimeLibraries
+                }
+
+                task copyInternalRuntimeLibraries(type: Copy) {
+                    description 'Assembles internal runtime libraries'
+                    into internalRuntimeLibrariesDirectoryPath
+                    from configurations.runtime.findAll { !it.toString().contains('.gradle') }
+                    dependsOn cleanInternalRuntimeLibraries
+                }
+
+                task runtimeLibraries {
+                    dependsOn copyExternalRuntimeLibraries, copyInternalRuntimeLibraries
+                }
+
+                task classpath {
+                    description 'Assembles classpath including runtime libraries'
+                    group 'Build'
+                    dependsOn classes, runtimeLibraries
+                }
+            }
+
+            if (project.ext.has('serviceRoot')) {
+
+                task projectExists {
+                    doLast {
+                        def projectGradlePath = project.property('projectGradlePath')
+
+                        if (!findProject(projectGradlePath)) {
+                            throw new RuntimeException("Project '${projectGradlePath}' does not exist")
+                        }
+                    }
+                }
+
+                evaluationDependsOnChildren()
+
+                def unitTestTasks = allprojects.collect { it.tasks.withType(Test) }.flatten().findAll {
+                    it.name == 'test'
+                }
+
+                task unitTestReport(type: TestReport) {
+                    description = 'Generates a test report for all unit tests.'
+                    destinationDir = file("${reporting.baseDir}/unitTest")
+                    reportOn unitTestTasks.collect { it.binResultsDir }
+                }
+
+                task unitTest {
+                    description = 'Runs all unit tests.'
+                    group = 'verification'
+                    dependsOn unitTestTasks
+                    finalizedBy unitTestReport
+                }
+
+                unitTestTasks.each { it.finalizedBy unitTestReport }
+                unitTestReport.mustRunAfter unitTest
+
+                check.dependsOn unitTest
+
+                def environmentTestTasks = allprojects.collect { it.tasks.withType(Test) }.flatten().findAll {
+                    it.name != 'test' && it.name != 'systemLevelInterServiceContractTest'
+                }
+
+                task environmentTestReport(type: TestReport) {
+                    description = 'Generates test report for all tests that require a running environment.'
+                    destinationDir = file("${reporting.baseDir}/environmentTest")
+                    reportOn environmentTestTasks.collect { it.binResultsDir }
+                }
+
+                task environmentTest {
+                    description = 'Runs all tests that require a running environment.'
+                    group = 'verification'
+                    dependsOn environmentTestTasks
+                    finalizedBy environmentTestReport
+                }
+
+                environmentTestTasks.each { it.finalizedBy environmentTestReport }
+                environmentTestReport.mustRunAfter environmentTest
+
+                def interServiceContractTestTasks = allprojects.collect { it.tasks.withType(Test) }.flatten().findAll {
+                    it.ext.has('interServiceContractTest') && it.ext.interServiceContractTest
+                }
+
+                task interServiceContractTestReport(type: TestReport) {
+                    description = 'Generates test report for all inter-service contract tests.'
+                    destinationDir = file("${reporting.baseDir}/interServiceContractTest")
+                    reportOn interServiceContractTestTasks.collect { it.binResultsDir }
+                }
+
+                task interServiceContractTest {
+                    description = 'Runs all inter-service contract tests.'
+                    group = 'verification'
+                    dependsOn interServiceContractTestTasks
+                    finalizedBy interServiceContractTestReport
+                }
+
+                interServiceContractTestTasks.each { it.finalizedBy interServiceContractTestReport }
+                interServiceContractTestReport.mustRunAfter interServiceContractTest
+            }
+        }
+    }
+}
